@@ -45,12 +45,14 @@ u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravi
 \section{Linearne temporalne logike}
 \label{sec:LTL}
 
+\newline
 Kao sto smo vec napomenuli, Temporalne logike ukljucuju u razmatranje i vreme, pa stoga cemo prvo opisati LTL model, linearne temporalne logike. Linearne temporalne logike predstavljaju beskonacan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logicku formulu koja opisuje skup beskonacnih sekvenci koje su tacne, tj. imaju vrednost 'True'. 
 
-Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoc precizno definisane sintakse. Ovu logiku odlikuje pojava razlicitih operatora, cijom upotrebom mozemo opisati razne modele vremena, ali nama ce za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logicki veznici, kojima mozemo opisati svako temporalnu logiku.
-
+Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoc precizno definisane sintakse. Ovu logiku odlikuje pojava razlicitih operatora, cijom upotrebom mozemo opisati razne modele vremena, ali nama ce za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logicki veznici, kojima mozemo opisati svako temporalnu logiku.\newline
+\newline
 Sintaksa
-
+\newline
+\newline
 LTL formula je sacinjena od \newline
 	1) konacnog skupa atoma (a, b, x, y, ....) \newline
 	2) osnovnih logickih operatora (¬ (negation) , ∧ (conjunction)) \newline
@@ -78,7 +80,8 @@ LTL moze biti prosireno sa operatorima proslosti \newline
 	-b ostaje True dok a ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) znaci suprotno od prethodnog \newline
 
 Semantika
-
+\newline
+\newline
 Sintaksa logike je definisala kako nesto mozemo zapisati ispravno, a semantika daje znacenje istom.
 Vrste sistema koje obicno modelujemo uz pomoc LTL-a mozemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja staticku strukturu i trannziciju, sto predstavlja dinamicku strukturu.
 LTL formula φ oznacava svojstva puteva (traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
@@ -89,6 +92,47 @@ TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sv
 TS zadovoljava ϕ ako TS zadovoljava LT svojstva dedfinisana na Jezik(ϕ).
 }
 
+\section{Logike stabla izracunavanja}
+\label{sec:CTL}
+
+CTL (Logike stabla)
+\newline
+\newline
+U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. paths). Definisali smo da je stanica(state) sistema
+zadovoljava jednu LTL formulu ako svi putevi iz te stanice(state) zadovoljavaju istu. U ovoj strukturi drveta buduci koraci jos nisu
+odredjeni, jer postoji vise puteva koji potencijalno mogu biti 'iskoriscena'.
+CTL nam omogucava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
+A i E koji opisuju sve puteve(all paths) i postojece puteve (exists paths). 
+\newline
+\newline
+Sintaksa
+\newline
+\newline
+CTL (eng Computation tree logic) koristi logiku stabla pri izracunavanju. 
+Kao pre, radimo sa konacnim skupom atomickih formula (kao sto su p, q, r,...,p1,p2,p3...).
+
+Definisemo CTL formulu:
+
+ϕ ::= T | neT | p | (neϕ) | (ϕ /\ ϕ) | (ϕ \/ ϕ) | (ϕ -> ϕ) | AXϕ | EXϕ | Afϕ | EFϕ | AGϕ | EGϕ | A[ϕ U ϕ] | E[ϕ U ϕ]
+
+gde je p iz konackog skupa atomickih formula.
+\newline
+\newline
+Semantika
+\newline
+\newline
+CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je M = (S, ->, L) neki model, s e S i ϕ CTL formula.
+Definicija modela bi bila sledeca
+
+	1) Ako je ϕ atomicka, zadovoljivost je razresena preko L \newline
+	2) Ako veznik najviseg prioriteta formule ϕ je bulovski veznik tada se pitanje zadovoljivosti razresava
+	   preko uobicajne istinitosne tablice i rekurzije nad drvetom formule ϕ \newline
+	3) Ako je veznik najviseg prioriteta neki operator koji pocinje sa A, tada zadovoljivost jeste ispunjena ako
+	   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A \newline
+	4) Slicno ako je veznik najviseg prioriteta neki operator koji pocinje sa E, ada zadovoljivost jeste ispunjena ako
+	   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E \newline
+
+\newpage
 \begin{primer}
 Problem zaustavljanja (eng.~{\em halting problem}) je neodlučiv \cite{haltingproblem}.
 \end{primer}
