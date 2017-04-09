@@ -1,419 +1,459 @@
-% !TEX encoding = UTF-8 Unicode
+	% !TEX encoding = UTF-8 Unicode
 
-\documentclass[a4paper]{article}
+	\documentclass[a4paper]{article}
 
-\usepackage{color}
-\usepackage{url}
-\usepackage[T2A]{fontenc} % enable Cyrillic fonts
-\usepackage[utf8]{inputenc} % make weird characters work
-\usepackage{graphicx}
-
-\usepackage[english,serbian]{babel}
-%\usepackage[english,serbianc]{babel} %ukljuciti babel sa ovim opcijama, umesto gornjim, ukoliko se koristi cirilica
-
-\usepackage[unicode]{hyperref}
-\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
-
-%\newtheorem{primer}{Пример}[section] %ćirilični primer
-\newtheorem{primer}{Primer}[section]
-
-\begin{document}
-
-\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
-
-\author{Djordje Todorovic, Stefan Zaric, Maksim Djurdjevac\\ mi12090@matf.bg.ac.rs, drugog (trećeg) autora}
-\date{8.~april 2017.}
-\maketitle
-
-\abstract{
-Ovaj seminarski rad obradjuje temu temporalne logike, zapravo upotrebu logike u racunarstvu.
-Preciznije su opisane osnove linarne temporalne logike (LTL) i logike stabla 
-izracunavanja (CTL), osnovne primene ovih logika, takodje i najpoznatiji alati za proveravanje modela,
-kao i ukratko mogucnosti alata ESBMC i neki primeri njegovih upotreba.
-
-\tableofcontents
-
-\newpage
-
-\section{Uvod}
-\label{sec:uvod}
-
-Glavni cilj upotrebe logike u racunarstvu je da se razviju jezici koji modeluju situacije koje srecemo kao profesionalci
-u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolicki, sto ce reci da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematicke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumacenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematickih problema koje srecemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srecemo svakodnevno u zivotu. Temporalne logike su logike koje opisuju rezonovanja u kojima je ukljuceno i vreme. Primena ovih logika je sve veca kako kod softverskih resenja, tako i kod kreiranja samog hardvera.
-
-\newpage
-\section{Linearne temporalne logike}
-\label{sec:LTL}
-
-\newline
-Kao sto smo vec napomenuli, Temporalne logike ukljucuju u razmatranje i vreme, pa stoga cemo prvo opisati LTL model, linearne temporalne logike. Linearne temporalne logike predstavljaju beskonacan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logicku formulu koja opisuje skup beskonacnih sekvenci koje su tacne, tj. imaju vrednost 'True'. 
-
-Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoc precizno definisane sintakse. Ovu logiku odlikuje pojava razlicitih operatora, cijom upotrebom mozemo opisati razne modele vremena, ali nama ce za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logicki veznici, kojima mozemo opisati svako temporalnu logiku.\newline
-\newline
-Sintaksa
-\newline
-\newline
-LTL formula je sacinjena od \newline
-	1) konacnog skupa atoma (a, b, x, y, ....) \newline
-	2) osnovnih logickih operatora (¬ (negation) , ∧ (conjunction)) \newline
-	3) osnovnih temporalnih operatora (O (next) , U (until) , true) \newline
-	4) Postoje i dodatni logicki operatori (∨ (disjunction), →(implication), ↔(equivalence)) \newline
-	5) Postoje i dodatni temporalni operatori ( □ (”always”) ♦ (”eventually”)) \newline
-
-Kombinacijom navedenih mozemo dobiti slozenije operatore.
-
-Navescemo jos neka pravila: \newline
-
-	*) ♦ -> "F" Konacno sto znaci nesto u buducnosti \newline
-	*) □ -> "G" Globalno sto znaci globalno u buducnosti \newline
-	*) ○ -> "X" Sledeci put \newline
-
-LTL moze biti prosireno sa operatorima proslosti \newline
-	
-	*) □-1 -> Uvek u proslosti \newline
-	*) ♦-1 -> Ponekad u proslosti \newline
-	*) ○-1 -> Prethodna sekvenca \newline
-
-*) Weak until (a W b) \newline
-	-a ostaje True dok b ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) \newline
-*) Release (a R b) \newline
-	-b ostaje True dok a ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) znaci suprotno od prethodnog \newline
-
-Semantika
-\newline
-\newline
-Sintaksa logike je definisala kako nesto mozemo zapisati ispravno, a semantika daje znacenje istom.
-Vrste sistema koje obicno modelujemo uz pomoc LTL-a mozemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja staticku strukturu i trannziciju, sto predstavlja dinamicku strukturu.
-LTL formula φ oznacava svojstva puteva (traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
-Semantika formule φ je definisana kao jezik(φ) gde on sadrzi beskonacnan skup reci koje zadovoljavaju φ.
-
-TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponasanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
-
-TS zadovoljava ϕ ako TS zadovoljava LT svojstva dedfinisana na Jezik(ϕ).
-}
-
-\section{Logike stabla izracunavanja}
-\label{sec:CTL}
-
-CTL (Logike stabla)
-\newline
-\newline
-U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. paths). Definisali smo da je stanica(state) sistema
-zadovoljava jednu LTL formulu ako svi putevi iz te stanice(state) zadovoljavaju istu. U ovoj strukturi drveta buduci koraci jos nisu
-odredjeni, jer postoji vise puteva koji potencijalno mogu biti 'iskoriscena'.
-CTL nam omogucava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
-A i E koji opisuju sve puteve(all paths) i postojece puteve (exists paths). 
-\newline
-\newline
-Sintaksa
-\newline
-\newline
-CTL (eng Computation tree logic) koristi logiku stabla pri izracunavanju. 
-Kao pre, radimo sa konacnim skupom atomickih formula (kao sto su p, q, r,...,p1,p2,p3...).
-
-Definisemo CTL formulu:
-
-ϕ ::= T | neT | p | (neϕ) | (ϕ /\ ϕ) | (ϕ \/ ϕ) | (ϕ -> ϕ) | AXϕ | EXϕ | Afϕ | EFϕ | AGϕ | EGϕ | A[ϕ U ϕ] | E[ϕ U ϕ]
-
-gde je p iz konackog skupa atomickih formula.
-\newline
-\newline
-Semantika
-\newline
-\newline
-CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je M = (S, ->, L) neki model, s e S i ϕ CTL formula.
-Definicija modela bi bila sledeca
-
-	1) Ako je ϕ atomicka, zadovoljivost je razresena preko L \newline
-	2) Ako veznik najviseg prioriteta formule ϕ je bulovski veznik tada se pitanje zadovoljivosti razresava
-	   preko uobicajne istinitosne tablice i rekurzije nad drvetom formule ϕ \newline
-	3) Ako je veznik najviseg prioriteta neki operator koji pocinje sa A, tada zadovoljivost jeste ispunjena ako
-	   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A \newline
-	4) Slicno ako je veznik najviseg prioriteta neki operator koji pocinje sa E, ada zadovoljivost jeste ispunjena ako
-	   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E \newline
-
-\newpage
-
-\section{Primena temporalnih logika u proveravanju modela}
-\label{sec:MC}
-
-Temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne moze naci u stanju deadlocka. 
-Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom temporalne logike. 
-Svaki zahtev u specifikaciji moze se predstaviti jednom formulom linearne temporalne logike i moze se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
-Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tacna u toj strukturi, odnosno da li program ispunjava specifikaciju.
-Algoritam linearne temporalne logike za proveru modela je procedura koja vraca "da" za dati tranzicioni sistem TS i formulu ϕ ako je TS |= ϕ, odnosno "ne" ako TS nije model formule ϕ.
-
-Prednosti i mane koriscenja provere modela.
-
-Prednosti: \newline
-- Nema potrebe za formalnim dokazima korektnosti. \newline
-- Brzina, u poredjenju sa drugim metodima verifikacije. \newline
-- Ako specifikacija nije zadovoljena bice generisan kontraprimer koji ce pokazati zasto specifikacija nije ispunjena. \newline
-- Moguce je proveriti ispunjenost zahteva i pre nego sto je ceo sistem zavrsen, tako da se moze vrsiti provera modela tokom izrade veceg sistema. \newline
-- Koriscenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
-Mane: \newline
-- Zadavanje specifikacija formulama linearne temporalne logike moze da bude komplikovano. \newline
-- Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. \newline
-- Broj stanja u kome sistem moze da se nadje moze biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
-
-Algoritam za proveru modela upotrebom automata i linearne temporalne logike
-
-Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula ϕ \newline
-Izlaz: "da" ako je TS |= ϕ; inace, “ne” i generisan kontraprimer \newline
-
-Konstruisati NBA[\ref] A¬ϕ tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
-Konstruisati tranzicioni sistem TS⊗A \newline
-
-if postoji put π u TS⊗A koji zadovoljava uslov ispunjenosti A then \newline
-return "ne" i an expressive prefix of π \newline
-else \newline
-return "da" \newline
-fi \newline
-
-\newpage
-
-\begin{primer}
-Problem zaustavljanja (eng.~{\em halting problem}) je neodlučiv \cite{haltingproblem}.
-\end{primer}
-
-\begin{primer}
-Za prevođenje programa napisanih u programskom jeziku C može se koristiti GCC kompajler \cite{gcc}.
-\end{primer}
-
-\begin{primer}
- Da bi se ispitivala ispravost softvera, najpre je potrebno precizno definisati njegovo ponašanje \cite{laski2009software}. 
-\end{primer}
-
-Reference koje se koriste u ovom tekstu zadate su u datoteci {\em seminarski.bib}. Prevođenje u pdf format u Linux okruženju može se uraditi na sledeći način:
-\begin{verbatim}
-pdflatex TemaImePrezime.tex 
-bibtex TemaImePrezime.aux 
-pdflatex TemaImePrezime.tex 
-pdflatex TemaImePrezime.tex 
-\end{verbatim}
-Prvo latexovanje je neophodno da bi se generisao {\em .aux} fajl. {\em bibtex} proizvodi odgovarajući {\em .bbl} fajl koji se koristi za generisanje literature. 
-Potrebna su dva prolaza (dva puta pdflatex) da bi se reference ubacile u tekst (tj da ne bi ostali znakovi pitanja umesto referenci). Dodavanjem novih referenci potrebno je ponoviti ceo postupak.  
-
-
-Broj naslova i podnaslova je proizvoljan. Neophodni su samo Uvod i Zaključak. Na poglavlja unutar teksta referisati se po potrebi. 
-\begin{primer}
-U odeljku \ref{sec:naslov1} precizirani su osnovni pojmovi, dok su zaključci dati u odeljku \ref{sec:zakljucak}.
-\end{primer}
-
-Još jednom da napomenem da nema razloga da pišete:
-\begin{verbatim}
-\v{s} i \v{c} i \'c ...
-\end{verbatim}
-Možete koristiti srpska slova
-\begin{verbatim}
-š i č i ć ... 
-\end{verbatim}
-
-
-Ovde pišem uvodni tekst.
-Ovde pišem uvodni tekst. 
-Ovde pišem uvodni tekst. 
-Ovde pišem uvodni tekst. 
-
-
-\section{Slike i tabele}
-\label{slike_i_tabele}
-
-Slike i tabele treba da budu u svom okruženju, sa odgovarajućim naslovima, obeležene labelom da koje omogućava referenciranje. 
-
-\begin{primer} Ovako se ubacuje slika. Obratiti pažnju da je dodato i 
-\begin{verbatim}
-\usepackage{graphicx}
-\end{verbatim}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[scale=0.75]{panda.jpg}
-\end{center}
-\caption{Pande}
-\label{fig:pande}
-\end{figure}
-
-Na svaku sliku neophodno je referisati se negde u tekstu. Na primer, na slici \ref{fig:pande} prikazane su pande. 
-\end{primer}
-
-\begin{primer} I tabele treba da budu u svom okruženju, i na njih je neophodno referisati se u tekstu. Na primer, u tabeli \ref{tab:tabela1} su prikazana različita poravnanja u tabelama.
-
-\begin{table}[h!]
-\begin{center}
-\caption{Razlčita poravnanja u okviru iste tabele ne treba koristiti jer su nepregledna.}
-\begin{tabular}{|c|l|r|} \hline
-centralno poravnanje& levo poravnanje& desno poravnanje\\ \hline
-a &b&c\\ \hline
-d &e&f\\ \hline
-\end{tabular}
-\label{tab:tabela1}
-\end{center}
-\end{table}
-
-\end{primer}
-
-
-
-
-
-\section{ESBMC verifikacioni alat}
-\label{sec:ESBMC}
-
-U dizajnu komleksnih softverskih sistema više se truda i vremena potroši na
-verifikaciju nego na kontrukciju samog sofvera. Verifikacione tehnike  zasnovane na modelima se baziraju na modelima koji opisuju ponašanje sistema na matematički precizan i nedvosmislen način. Ispostavilo se da pre bilo kakvih verifikacionih provera, precizno modelovanje sistema često dovodi do otkrivanja nepravilnosti, nepotpunosti i nelogičnosti u neformalnim specifikacijama sistema. Takvi problemi se obično otkrivaju u kasnim fazama dizajna.Modeli sistema su praćeni algoritmima koji sistematično istražuju sva njihova stanja. To je preduslov za čitav niz tehnika verifikacije polazeći od provera modela preko simulacije do testiranja.
-Provera modela je verifikaciona tehnika koja istražuje sva moguća stanja sistema koristeći brute-force način.
-\newline
-ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni C/C++ softver, baziran na SMT (eng. satisﬁability modulo theory) rešavaču.  On dozvoljava verifikacionom inženjeru da: 
-\newline
+	\usepackage{color}
+	\usepackage{url}
+	\usepackage[T2A]{fontenc} % enable Cyrillic fonts
+	\usepackage[utf8]{inputenc} % make weird characters work
+	\usepackage{graphicx}
+
+	\usepackage[english,serbian]{babel}
+	%\usepackage[english,serbianc]{babel} %ukljuciti babel sa ovim opcijama, umesto gornjim, ukoliko se koristi cirilica
+
+	\usepackage[unicode]{hyperref}
+	\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
+
+	%\newtheorem{primer}{Пример}[section] %ćirilični primer
+	\newtheorem{primer}{Primer}[section]
+
+	\begin{document}
+
+	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+
+	\author{Djordje Todorovic, Stefan Zaric, Maksim Djurdjevac\\ mi12090@matf.bg.ac.rs, drugog (trećeg) autora}
+	\date{8.~april 2017.}
+	\maketitle
+
+	\abstract{
+	Ovaj seminarski rad obradjuje temu temporalne logike, zapravo upotrebu logike u racunarstvu.
+	Preciznije su opisane osnove linarne temporalne logike (LTL) i logike stabla 
+	izracunavanja (CTL), osnovne primene ovih logika, takodje i najpoznatiji alati za proveravanje modela,
+	kao i ukratko mogucnosti alata ESBMC i neki primeri njegovih upotreba.
+
+	\tableofcontents
+
+	\newpage
+
+	\section{Uvod}
+	\label{sec:uvod}
+
+	Glavni cilj upotrebe logike u racunarstvu je da se razviju jezici koji modeluju situacije koje srecemo kao profesionalci
+	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolicki, sto ce reci da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematicke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumacenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematickih problema koje srecemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srecemo svakodnevno u zivotu. Temporalne logike su logike koje opisuju rezonovanja u kojima je ukljuceno i vreme. Primena ovih logika je sve veca kako kod softverskih resenja, tako i kod kreiranja samog hardvera.
+
+	\newpage
+	\section{Linearne temporalne logike}
+	\label{sec:LTL}
+
+	\newline
+	Kao sto smo vec napomenuli, Temporalne logike ukljucuju u razmatranje i vreme, pa stoga cemo prvo opisati LTL model, linearne temporalne logike. Linearne temporalne logike predstavljaju beskonacan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logicku formulu koja opisuje skup beskonacnih sekvenci koje su tacne, tj. imaju vrednost 'True'. 
+
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoc precizno definisane sintakse. Ovu logiku odlikuje pojava razlicitih operatora, cijom upotrebom mozemo opisati razne modele vremena, ali nama ce za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logicki veznici, kojima mozemo opisati svako temporalnu logiku.\newline
+	\newline
+	Sintaksa
+	\newline
+	\newline
+	LTL formula je sacinjena od \newline
+		1) konacnog skupa atoma (a, b, x, y, ....) \newline
+		2) osnovnih logickih operatora (¬ (negation) , ∧ (conjunction)) \newline
+		3) osnovnih temporalnih operatora (O (next) , U (until) , true) \newline
+		4) Postoje i dodatni logicki operatori (∨ (disjunction), →(implication), ↔(equivalence)) \newline
+		5) Postoje i dodatni temporalni operatori ( □ (”always”) ♦ (”eventually”)) \newline
+
+	Kombinacijom navedenih mozemo dobiti slozenije operatore.
+
+	Navescemo jos neka pravila: \newline
+
+		*) ♦ -> "F" Konacno sto znaci nesto u buducnosti \newline
+		*) □ -> "G" Globalno sto znaci globalno u buducnosti \newline
+		*) ○ -> "X" Sledeci put \newline
+
+	LTL moze biti prosireno sa operatorima proslosti \newline
+		
+		*) □-1 -> Uvek u proslosti \newline
+		*) ♦-1 -> Ponekad u proslosti \newline
+		*) ○-1 -> Prethodna sekvenca \newline
+
+	*) Weak until (a W b) \newline
+		-a ostaje True dok b ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) \newline
+	*) Release (a R b) \newline
+		-b ostaje True dok a ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) znaci suprotno od prethodnog \newline
+
+	Semantika
+	\newline
+	\newline
+	Sintaksa logike je definisala kako nesto mozemo zapisati ispravno, a semantika daje znacenje istom.
+	Vrste sistema koje obicno modelujemo uz pomoc LTL-a mozemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja staticku strukturu i trannziciju, sto predstavlja dinamicku strukturu.
+	LTL formula φ oznacava svojstva puteva (traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
+	Semantika formule φ je definisana kao jezik(φ) gde on sadrzi beskonacnan skup reci koje zadovoljavaju φ.
+
+	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponasanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
+
+	TS zadovoljava ϕ ako TS zadovoljava LT svojstva dedfinisana na Jezik(ϕ).
+	}
+
+	\section{Logike stabla izracunavanja}
+	\label{sec:CTL}
+
+	CTL (Logike stabla)
+	\newline
+	\newline
+	U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. paths). Definisali smo da je stanica(state) sistema
+	zadovoljava jednu LTL formulu ako svi putevi iz te stanice(state) zadovoljavaju istu. U ovoj strukturi drveta buduci koraci jos nisu
+	odredjeni, jer postoji vise puteva koji potencijalno mogu biti 'iskoriscena'.
+	CTL nam omogucava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
+	A i E koji opisuju sve puteve(all paths) i postojece puteve (exists paths). 
+	\newline
+	\newline
+	Sintaksa
+	\newline
+	\newline
+	CTL (eng Computation tree logic) koristi logiku stabla pri izracunavanju. 
+	Kao pre, radimo sa konacnim skupom atomickih formula (kao sto su p, q, r,...,p1,p2,p3...).
+
+	Definisemo CTL formulu:
+
+	ϕ ::= T | neT | p | (neϕ) | (ϕ /\ ϕ) | (ϕ \/ ϕ) | (ϕ -> ϕ) | AXϕ | EXϕ | Afϕ | EFϕ | AGϕ | EGϕ | A[ϕ U ϕ] | E[ϕ U ϕ]
+
+	gde je p iz konackog skupa atomickih formula.
+	\newline
+	\newline
+	Semantika
+	\newline
+	\newline
+	CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je M = (S, ->, L) neki model, s e S i ϕ CTL formula.
+	Definicija modela bi bila sledeca
+
+		1) Ako je ϕ atomicka, zadovoljivost je razresena preko L \newline
+		2) Ako veznik najviseg prioriteta formule ϕ je bulovski veznik tada se pitanje zadovoljivosti razresava
+		   preko uobicajne istinitosne tablice i rekurzije nad drvetom formule ϕ \newline
+		3) Ako je veznik najviseg prioriteta neki operator koji pocinje sa A, tada zadovoljivost jeste ispunjena ako
+		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A \newline
+		4) Slicno ako je veznik najviseg prioriteta neki operator koji pocinje sa E, ada zadovoljivost jeste ispunjena ako
+		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E \newline
+
+	\newpage
+
+	\section{Primena temporalnih logika u proveravanju modela}
+	\label{sec:MC}
+
+	Temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne moze naci u stanju deadlocka. 
+	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom temporalne logike. 
+	Svaki zahtev u specifikaciji moze se predstaviti jednom formulom linearne temporalne logike i moze se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
+	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tacna u toj strukturi, odnosno da li program ispunjava specifikaciju.
+	Algoritam linearne temporalne logike za proveru modela je procedura koja vraca "da" za dati tranzicioni sistem TS i formulu ϕ ako je TS |= ϕ, odnosno "ne" ako TS nije model formule ϕ.
+
+	Prednosti i mane koriscenja provere modela.
+
+	Prednosti: \newline
+	- Nema potrebe za formalnim dokazima korektnosti. \newline
+	- Brzina, u poredjenju sa drugim metodima verifikacije. \newline
+	- Ako specifikacija nije zadovoljena bice generisan kontraprimer koji ce pokazati zasto specifikacija nije ispunjena. \newline
+	- Moguce je proveriti ispunjenost zahteva i pre nego sto je ceo sistem zavrsen, tako da se moze vrsiti provera modela tokom izrade veceg sistema. \newline
+	- Koriscenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
+	Mane: \newline
+	- Zadavanje specifikacija formulama linearne temporalne logike moze da bude komplikovano. \newline
+	- Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. \newline
+	- Broj stanja u kome sistem moze da se nadje moze biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
+
+	Algoritam za proveru modela upotrebom automata i linearne temporalne logike
+
+	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula ϕ \newline
+	Izlaz: "da" ako je TS |= ϕ; inace, “ne” i generisan kontraprimer \newline
+
+	Konstruisati NBA[\ref] A¬ϕ tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
+	Konstruisati tranzicioni sistem TS⊗A \newline
+
+	if postoji put π u TS⊗A koji zadovoljava uslov ispunjenosti A then \newline
+	return "ne" i an expressive prefix of π \newline
+	else \newline
+	return "da" \newline
+	fi \newline
+
+	\newpage
+
+	\begin{primer}
+	Problem zaustavljanja (eng.~{\em halting problem}) je neodlučiv \cite{haltingproblem}.
+	\end{primer}
+
+	\begin{primer}
+	Za prevođenje programa napisanih u programskom jeziku C može se koristiti GCC kompajler \cite{gcc}.
+	\end{primer}
+
+	\begin{primer}
+	 Da bi se ispitivala ispravost softvera, najpre je potrebno precizno definisati njegovo ponašanje \cite{laski2009software}. 
+	\end{primer}
+
+	Reference koje se koriste u ovom tekstu zadate su u datoteci {\em seminarski.bib}. Prevođenje u pdf format u Linux okruženju može se uraditi na sledeći način:
+	\begin{verbatim}
+	pdflatex TemaImePrezime.tex 
+	bibtex TemaImePrezime.aux 
+	pdflatex TemaImePrezime.tex 
+	pdflatex TemaImePrezime.tex 
+	\end{verbatim}
+	Prvo latexovanje je neophodno da bi se generisao {\em .aux} fajl. {\em bibtex} proizvodi odgovarajući {\em .bbl} fajl koji se koristi za generisanje literature. 
+	Potrebna su dva prolaza (dva puta pdflatex) da bi se reference ubacile u tekst (tj da ne bi ostali znakovi pitanja umesto referenci). Dodavanjem novih referenci potrebno je ponoviti ceo postupak.  
+
+
+	Broj naslova i podnaslova je proizvoljan. Neophodni su samo Uvod i Zaključak. Na poglavlja unutar teksta referisati se po potrebi. 
+	\begin{primer}
+	U odeljku \ref{sec:naslov1} precizirani su osnovni pojmovi, dok su zaključci dati u odeljku \ref{sec:zakljucak}.
+	\end{primer}
+
+	Još jednom da napomenem da nema razloga da pišete:
+	\begin{verbatim}
+	\v{s} i \v{c} i \'c ...
+	\end{verbatim}
+	Možete koristiti srpska slova
+	\begin{verbatim}
+	š i č i ć ... 
+	\end{verbatim}
+
+
+	Ovde pišem uvodni tekst.
+	Ovde pišem uvodni tekst. 
+	Ovde pišem uvodni tekst. 
+	Ovde pišem uvodni tekst. 
+
+
+	\section{Slike i tabele}
+	\label{slike_i_tabele}
+
+	Slike i tabele treba da budu u svom okruženju, sa odgovarajućim naslovima, obeležene labelom da koje omogućava referenciranje. 
+
+	\begin{primer} Ovako se ubacuje slika. Obratiti pažnju da je dodato i 
+	\begin{verbatim}
+	\usepackage{graphicx}
+	\end{verbatim}
+
+	\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[scale=0.75]{panda.jpg}
+	\end{center}
+	\caption{Pande}
+	\label{fig:pande}
+	\end{figure}
+
+	Na svaku sliku neophodno je referisati se negde u tekstu. Na primer, na slici \ref{fig:pande} prikazane su pande. 
+	\end{primer}
+
+	\begin{primer} I tabele treba da budu u svom okruženju, i na njih je neophodno referisati se u tekstu. Na primer, u tabeli \ref{tab:tabela1} su prikazana različita poravnanja u tabelama.
+
+	\begin{table}[h!]
+	\begin{center}
+	\caption{Razlčita poravnanja u okviru iste tabele ne treba koristiti jer su nepregledna.}
+	\begin{tabular}{|c|l|r|} \hline
+	centralno poravnanje& levo poravnanje& desno poravnanje\\ \hline
+	a &b&c\\ \hline
+	d &e&f\\ \hline
+	\end{tabular}
+	\label{tab:tabela1}
+	\end{center}
+	\end{table}
+
+	\end{primer}
+
+
+
+
+
+	\section{ESBMC verifikacioni alat}
+	\label{sec:ESBMC}
+
+	U dizajnu komleksnih softverskih sistema više se truda i vremena potroši na
+	verifikaciju nego na kontrukciju samog sofvera. Verifikacione tehnike  zasnovane na modelima se baziraju na modelima koji opisuju ponašanje sistema na matematički precizan i nedvosmislen način. Ispostavilo se da pre bilo kakvih verifikacionih provera, precizno modelovanje sistema često dovodi do otkrivanja nepravilnosti, nepotpunosti i nelogičnosti u neformalnim specifikacijama sistema. Takvi problemi se obično otkrivaju u kasnim fazama dizajna.Modeli sistema su praćeni algoritmima koji sistematično istražuju sva njihova stanja. To je preduslov za čitav niz tehnika verifikacije polazeći od provera modela preko simulacije do testiranja.
+	Provera modela je verifikaciona tehnika koja istražuje sva moguća stanja sistema koristeći brute-force način.
+	\newline
+	ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni C/C++ softver, baziran na SMT (eng. satisﬁability modulo theory) rešavaču.  On dozvoljava verifikacionom inženjeru da: 
+	\newline
+	\begin{enumerate}
+	\item Verifikuje jedno- i višenitni softver (sa deljenim promenljivama i                       međusobnim isključenjem);
+	\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju               memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja,             mrtvim blokadama i utrkivanjima; 
+	\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača,                  struktura, unija i sa fiksnim zarezom.
+	\end{enumerate}
+	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. pre/post-conditions), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. Dodatno, ESBMC može da vrati vrednost verifikacionih uslova koristeći.
+	\newline
+	Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu.. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
+	\newline
+	ESBMC  koristi transformacije  da pretvori program u niz matematičkih ograničenja:
+	\begin{enumerate}
+	\item Komponente biblioteka su objedinjene u programski tekst.
+	\item Kontrola toka se pretvara u jednostavnu GOTO formu.
+	\item GOTO program se prevodi u formu  u kojoj se zahteva da je promenljivoj dodeljena vrednost tačno jednom i svaka promenljiva je definisana, pre korišćenja.U ovoj fazi smo se pomerili sa predstavljanja C promenljive u promenljivu koja algebarsku nepoznatu povezuje sa svakim izvršenjem jednog zadatka.
+	\item Uvodimo dodatna ograničenja izmedju nepoznatih, koja jedino mogu biti zadovoljena ako program ima grešku.
+	\item SMT(eng. satisﬁability modulo theory) rešavač se pokreće da istraži da li sva ograničenja mogu biti zadovoljena odjednom. Bilo koji uspeh je greška u programu.
+	\item Ako SMT solver uspe(program ne prolazi)koristimo njegovo uspešno dodeljivanje promenljive nepoznatoj da zaključimo pogrešan tok programa.
+	\end{enumerate}
+	Za ovaj primer programa:
+	\newline
+	\begin{primer}
+
+	\newline \#include  <stdlib.h>  
+	\newline
+	int main()
+	\newline
+	\{
+	\newline
+		 unsigned int size = nondet_int();
+	\newline
+		char *hunk = malloc(size); 
+		\newline
+		unsigned int pos = nondet_int(); 
+		\newline
+		hunk[pos] = 0; return 0;
+		\newline
+	\}
+
+
+	Generiše se sledeći izveštaj:
+	\newline
+	Violated property: file test.c line 10 function main dereference failure: dynamic object upper bound !(\_\_ESBMC\_is\_dynamic[POINTER\_OBJECT(hunk + pos)] \&\& DYNAMIC\_SIZE(hunk + pos) <= POINTER\_OFFSET(hunk) + pos) VERIFICATION FAILED
+	\end{primer}
+
+
+	\subsection{Primena}
+	\label{subsec:Primena}
+
+	Verifikacija softvera može imati različite primene.  Najčeća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
+
+
+	\subsection{Drugi podnaslov}
+	\label{subsec:podnaslov2}
+
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+
+	\section{Najpoznatiji alati za proveru modela}
+\label{sec:NazpM}
+
+Neki od napoznatijih alata za proveru modela su:
 \begin{enumerate}
-\item Verifikuje jedno- i višenitni softver (sa deljenim promenljivama i                       međusobnim isključenjem);
-\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju               memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja,             mrtvim blokadama i utrkivanjima; 
-\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača,                  struktura, unija i sa fiksnim zarezom.
+\item ARC
+\item BANDERA
+\item BLAST
+\item CADENCE SMV
+\item CADP
+\item CBMC
+\item CPAchecker
+\item CWB-NC
+\item DIVINE
+\item DREAM
+\item DSVerifier
+\item EBMC
+\item Edinburgh CWB
+\item EmbeddedValidator
+\item Expander2
+\item Fc2Tools
+\item GEAR
+\item ImProve
+\item Java Pathfinder
+\item LLBMC
+\item LTSA
+\item LTSmin
+\item MCMAS
+\item mCRL2
+\item MRMC
+\item ompca, OpenMP C Analysis
+\item PAT
+\item PRISM
+\item ProB
+\item Reactis Tester
+\item RED
+\item SAL
+\item SATABS
+\item SATMC
+\item SLMC
+\item SPIN
+\item Spot
+\item TAPAAL
+\item TAPAs
+\item UPPAAL
+ \item ROMEO
 \end{enumerate}
-ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. pre/post-conditions), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. Dodatno, ESBMC može da vrati vrednost verifikacionih uslova koristeći.
-\newline
-Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu.. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
-\newline
-ESBMC  koristi transformacije  da pretvori program u niz matematičkih ograničenja:
-\begin{enumerate}
-\item Komponente biblioteka su objedinjene u programski tekst.
-\item Kontrola toka se pretvara u jednostavnu GOTO formu.
-\item GOTO program se prevodi u formu  u kojoj se zahteva da je promenljivoj dodeljena vrednost tačno jednom i svaka promenljiva je definisana, pre korišćenja.U ovoj fazi smo se pomerili sa predstavljanja C promenljive u promenljivu koja algebarsku nepoznatu povezuje sa svakim izvršenjem jednog zadatka.
-\item Uvodimo dodatna ograničenja izmedju nepoznatih, koja jedino mogu biti zadovoljena ako program ima grešku.
-\item SMT(eng. satisﬁability modulo theory) rešavač se pokreće da istraži da li sva ograničenja mogu biti zadovoljena odjednom. Bilo koji uspeh je greška u programu.
-\item Ako SMT solver uspe(program ne prolazi)koristimo njegovo uspešno dodeljivanje promenljive nepoznatoj da zaključimo pogrešan tok programa.
-\end{enumerate}
-Za ovaj primer programa:
-\newline
-\begin{primer}
 
-\newline \#include  <stdlib.h>  
-\newline
-int main()
-\newline
-\{
-\newline
-	 unsigned int size = nondet_int();
-\newline
-	char *hunk = malloc(size); 
-	\newline
-	unsigned int pos = nondet_int(); 
-	\newline
-	hunk[pos] = 0; return 0;
-	\newline
-\}
+	\subsection{... podnaslov}
+	\label{subsec:podnaslovN}
 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
 
-Generiše se sledeći izveštaj:
-\newline
-Violated property: file test.c line 10 function main dereference failure: dynamic object upper bound !(\_\_ESBMC\_is\_dynamic[POINTER\_OBJECT(hunk + pos)] \&\& DYNAMIC\_SIZE(hunk + pos) <= POINTER\_OFFSET(hunk) + pos) VERIFICATION FAILED
-\end{primer}
+	\section{n-ti naslov}
+	\label{sec:naslovN}
 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
 
-\subsection{Primena}
-\label{subsec:Primena}
+	\subsection{... podnaslov}
+	\label{subsec:podnaslovK}
 
-Verifikacija softvera može imati različite primene.  Najčeća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
 
+	\subsection{... podnaslov}
+	\label{subsec:podnaslovM}
 
-\subsection{Drugi podnaslov}
-\label{subsec:podnaslov2}
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
+	\section{Poslednji naslov}
+	\label{sec:naslovM}
 
-\section{Drugi naslov}
-\label{sec:naslov2}
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
+	Ovde pišem tekst. 
 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
+	\section{Zaključak}
+	\label{sec:zakljucak}
 
-\subsection{... podnaslov}
-\label{subsec:podnaslovN}
-
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-
-\section{n-ti naslov}
-\label{sec:naslovN}
-
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-
-\subsection{... podnaslov}
-\label{subsec:podnaslovK}
-
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-
-\subsection{... podnaslov}
-\label{subsec:podnaslovM}
-
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-
-\section{Poslednji naslov}
-\label{sec:naslovM}
-
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-Ovde pišem tekst. 
-
-\section{Zaključak}
-\label{sec:zakljucak}
-
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
-Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
+	Ovde pišem zaključak. 
 
 
-\addcontentsline{toc}{section}{Literatura}
-\appendix
-\bibliography{seminarski} 
-\bibliographystyle{plain}
+	\addcontentsline{toc}{section}{Literatura}
+	\appendix
+	\bibliography{seminarski} 
+	\bibliographystyle{plain}
 
-\appendix
-\section{Dodatak}
-Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+	\appendix
+	\section{Dodatak}
+	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
 
 
-\end{document}
+	\end{document}
