@@ -137,39 +137,64 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 	\section{Primena temporalnih logika u proveravanju modela}
 	\label{sec:MC}
 
-	Temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne moze naci u stanju deadlocka. 
-	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom temporalne logike. 
-	Svaki zahtev u specifikaciji moze se predstaviti jednom formulom linearne temporalne logike i moze se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
-	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tacna u toj strukturi, odnosno da li program ispunjava specifikaciju.
-	Algoritam linearne temporalne logike za proveru modela je procedura koja vraca "da" za dati tranzicioni sistem TS i formulu ϕ ako je TS |= ϕ, odnosno "ne" ako TS nije model formule ϕ.
+\subsection{LTL}
+	\label{subsec:prLTL}
+	Linearna temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne može naći u stanju mrtve petlje. 
+	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom linearne temporalne logike. 
+	Svaki zahtev u specifikaciji može se predstaviti jednom formulom linearne temporalne logike i može se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
+	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tačna u toj strukturi, odnosno da li program ispunjava specifikaciju.
+	Algoritam linearne temporalne logike za proveru modela je procedura koja vraća "da" za dati tranzicioni sistem TS i formulu \phi ako je TS |= \phi, odnosno "ne" ako TS nije model formule \phi.
 
-	Prednosti i mane koriscenja provere modela.
+	Prednosti i mane korišćenja provere modela.
 
 	Prednosti: \newline
 	- Nema potrebe za formalnim dokazima korektnosti. \newline
 	- Brzina, u poredjenju sa drugim metodima verifikacije. \newline
-	- Ako specifikacija nije zadovoljena bice generisan kontraprimer koji ce pokazati zasto specifikacija nije ispunjena. \newline
-	- Moguce je proveriti ispunjenost zahteva i pre nego sto je ceo sistem zavrsen, tako da se moze vrsiti provera modela tokom izrade veceg sistema. \newline
-	- Koriscenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
+	- Ako specifikacija nije zadovoljena biće generisan kontraprimer koji ce pokazati kako se došlo u to stanje i onda se može zaključiti zasto specifikacija nije ispunjena. \newline
+	- Moguce je proveriti ispunjenost zahteva i pre nego što je ceo sistem završen, tako da se moze vršiti provera modela tokom izrade većeg sistema. \newline
+	- Korišćenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
 	Mane: \newline
-	- Zadavanje specifikacija formulama linearne temporalne logike moze da bude komplikovano. \newline
+	- Zadavanje specifikacija formulama linearne temporalne logike može da bude komplikovano. \newline
 	- Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. \newline
-	- Broj stanja u kome sistem moze da se nadje moze biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
+	- Broj stanja u kome sistem može da se nađe može biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
 
 	Algoritam za proveru modela upotrebom automata i linearne temporalne logike
 
-	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula ϕ \newline
-	Izlaz: "da" ako je TS |= ϕ; inace, “ne” i generisan kontraprimer \newline
+	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula \phi \newline
+	Izlaz: "da" ako je TS |= \phi; inace, “ne” i generisan kontraprimer \newline
 
-	Konstruisati NBA[\ref] A¬ϕ tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
+	Konstruisati NBA[referenca4] A\neg\phi tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
 	Konstruisati tranzicioni sistem TS⊗A \newline
 
-	if postoji put π u TS⊗A koji zadovoljava uslov ispunjenosti A then \newline
+	if postoji put π u TS \circ A koji zadovoljava uslov ispunjenosti A then \newline
 	return "ne" i an expressive prefix of π \newline
 	else \newline
 	return "da" \newline
 	fi \newline
 
+\subsection{CTL}
+	\label{subsec:prCTL}
+	
+Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela.[referenca1]
+Dakle model sistema je dat kao struktura, konacan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
+Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu.[referenca2]
+
+Algoritam: \newline
+Model checking \newline
+Implementation \newline
+\newline
+1. Define the system model M containing traces over the set Prop of propositions. \newline \newline
+2. Let specification ϕ be a formula over the set Prop. \newline \newline
+3. Check that M |H ϕ: \newline \newline
+• Translate the specification ¬ϕ into a Büchi automaton A¬ϕ and compose it with the
+system model M to form AM, ¬ϕ
+. \newline \newline
+• Check AM, ¬ϕ
+for nonemptiness. That is, search for a trace that is accepted by AM, ¬ϕ \newline \newline
+.
+– If such a trace exists, return it as a counterexample. \newline \newline
+– If no such trace exists, return TRUE. \newline \newline
+\newpage
 	\begin{primer}
 	Problem zaustavljanja (eng.~{\em halting problem}) je neodlučiv \cite{haltingproblem}.
 	\end{primer}
