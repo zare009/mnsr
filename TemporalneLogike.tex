@@ -40,21 +40,19 @@
 	\label{sec:uvod}
 
 	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci
-	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. Uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematićke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu. Temporalne logike su logike koje opisuju rezonovanja u kojima je uključeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera.
+	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. Uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematićke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu. Temporalne logike su logike koje opisuju rezonovanja u kojima je uključeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera.\newline
 	
 	Temporalne logike su sve značajnije u oblasti Informacionih tehnologija, tj. računarstvu, jer se ponašanje i hardvera i softvera opisuje u zavisnosti od vremena. Rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd. Vreme u temporalnoj logici modelujemo upotrebom različitih operatora. Osnovne vrste ovih logika jesu Linearne temporalne logike(LTL) i Logike stabla odlučivanja(CTL), ali u daljem tekstu će ova dve vrste biti detaljnije obrađene.
 
-	\newpage
 	\section{Linearne temporalne logike}
 	\label{sec:LTL}
 
 	\newline
 	Kao što smo već napomenuli, temporalne logike uključuju u razmatranje  vreme, i takođe smo pomenuli neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\newline
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.\newline
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
-	\newline
 	\newline
 	
 Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na pravilan način mogu kombinovati i stvarati takođe ispravni element. Kombinacijom operatora i iskaznih slova dobijamo logičke formule.\newline\newline Formula linearne temporalne logike je sačinjena od: \newline \newline
@@ -75,13 +73,12 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 		11) ○-1 -> Prethodna sekvenca \newline\newline
 		Takođe ćemo napomenuti i pravila 'weak until' i 'release':\newline
 	1) Weak until (a W b) \newline
-		-a ostaje True dok b ne postane True, pri tom može zauvek ostati True (ne zahteva se da b ikad postane True) \newpage
+		-a ostaje True dok b ne postane True, pri tom može zauvek ostati True (ne zahteva se da b ikad postane True)
 	2) Release (a R b) \newline
 		-b ostaje True dok a ne postane True, pri tom može zauvek ostati True (ne zahteva se da b ikad postane True) znači suprotno od prethodnog \newline
 
 	\subsection{Semantika}
 	\label{subsec:podnaslovN}
-	\newline
 	\newline
 	Sintaksa logike je definisala kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
 	Vrste sistema koje obično modelujemo uz pomoć LTL-a možemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja statičku strukturu i trannziciju, sto predstavlja dinamičku strukturu.
@@ -96,7 +93,6 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 	\section{Logike stabla izracunavanja}
 	\label{sec:CTL}
 	\newline
-	\newline
 	U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. paths). Definisali smo da je stanica(eng. state) sistema
 	zadovoljava jednu LTL formulu ako svi putevi iz te stanice(eng. state) zadovoljavaju istu. U ovoj strukturi drveta budući koraci još nisu
 	odredjeni, jer postoji više puteva koji potencijalno mogu biti 'iskorišćena'.
@@ -107,7 +103,6 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 	\newline
-	\newline
 	CTL (eng. Computation tree logic) koristi logiku stabla pri izračunavanju. 
 	Kao pre, radimo sa konačnim skupom atomičkih formula (kao što su p, q, r,...,p1,p2,p3...).
 
@@ -117,11 +112,11 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 
 	gde je p iz konačkog skupa atomičkih formula.
 	\newline
-	\newline
+	
 	\subsection{Semantika}
 	\label{subsec:podnaslovN}
 	\newline
-	\newline
+
 	CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je M = (S, ->, L) neki model, s e S i ϕ CTL formula.
 	Definicija modela bi bila sledeća:
 
@@ -137,107 +132,38 @@ Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na 
 	\section{Primena temporalnih logika u proveravanju modela}
 	\label{sec:MC}
 
-\subsection{LTL}
-	\label{subsec:prLTL}
-	Linearna temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne može naći u stanju mrtve petlje. 
-	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom linearne temporalne logike. 
-	Svaki zahtev u specifikaciji može se predstaviti jednom formulom linearne temporalne logike i može se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
-	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tačna u toj strukturi, odnosno da li program ispunjava specifikaciju.
-	Algoritam linearne temporalne logike za proveru modela je procedura koja vraća "da" za dati tranzicioni sistem TS i formulu \phi ako je TS |= \phi, odnosno "ne" ako TS nije model formule \phi.
+	Temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne moze naci u stanju deadlocka. 
+	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom temporalne logike. 
+	Svaki zahtev u specifikaciji moze se predstaviti jednom formulom linearne temporalne logike i moze se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
+	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tacna u toj strukturi, odnosno da li program ispunjava specifikaciju.
+	Algoritam linearne temporalne logike za proveru modela je procedura koja vraca "da" za dati tranzicioni sistem TS i formulu ϕ ako je TS |= ϕ, odnosno "ne" ako TS nije model formule ϕ.
 
-	Prednosti i mane korišćenja provere modela.
+	Prednosti i mane koriscenja provere modela.
 
 	Prednosti: \newline
 	- Nema potrebe za formalnim dokazima korektnosti. \newline
 	- Brzina, u poredjenju sa drugim metodima verifikacije. \newline
-	- Ako specifikacija nije zadovoljena biće generisan kontraprimer koji ce pokazati kako se došlo u to stanje i onda se može zaključiti zasto specifikacija nije ispunjena. \newline
-	- Moguce je proveriti ispunjenost zahteva i pre nego što je ceo sistem završen, tako da se moze vršiti provera modela tokom izrade većeg sistema. \newline
-	- Korišćenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
+	- Ako specifikacija nije zadovoljena bice generisan kontraprimer koji ce pokazati zasto specifikacija nije ispunjena. \newline
+	- Moguce je proveriti ispunjenost zahteva i pre nego sto je ceo sistem zavrsen, tako da se moze vrsiti provera modela tokom izrade veceg sistema. \newline
+	- Koriscenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
 	Mane: \newline
-	- Zadavanje specifikacija formulama linearne temporalne logike može da bude komplikovano. \newline
+	- Zadavanje specifikacija formulama linearne temporalne logike moze da bude komplikovano. \newline
 	- Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. \newline
-	- Broj stanja u kome sistem može da se nađe može biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
+	- Broj stanja u kome sistem moze da se nadje moze biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
 
 	Algoritam za proveru modela upotrebom automata i linearne temporalne logike
 
-	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula \phi \newline
-	Izlaz: "da" ako je TS |= \phi; inace, “ne” i generisan kontraprimer \newline
+	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula ϕ \newline
+	Izlaz: "da" ako je TS |= ϕ; inace, “ne” i generisan kontraprimer \newline
 
-	Konstruisati NBA[referenca4] A\neg\phi tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
+	Konstruisati NBA[\ref] A¬ϕ tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
 	Konstruisati tranzicioni sistem TS⊗A \newline
 
-	if postoji put π u TS \circ A koji zadovoljava uslov ispunjenosti A then \newline
+	if postoji put π u TS⊗A koji zadovoljava uslov ispunjenosti A then \newline
 	return "ne" i an expressive prefix of π \newline
 	else \newline
 	return "da" \newline
 	fi \newline
-
-\subsection{CTL}
-	\label{subsec:prCTL}
-	
-Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela.[referenca1]
-Dakle model sistema je dat kao struktura, konacan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
-Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu.[referenca2]
-
-Algoritam: \newline
-Model checking \newline
-Implementation \newline
-\newline
-1. Define the system model M containing traces over the set Prop of propositions. \newline \newline
-2. Let specification ϕ be a formula over the set Prop. \newline \newline
-3. Check that M |H ϕ: \newline \newline
-• Translate the specification ¬ϕ into a Büchi automaton A¬ϕ and compose it with the
-system model M to form AM, ¬ϕ
-. \newline \newline
-• Check AM, ¬ϕ
-for nonemptiness. That is, search for a trace that is accepted by AM, ¬ϕ \newline \newline
-.
-– If such a trace exists, return it as a counterexample. \newline \newline
-– If no such trace exists, return TRUE. \newline \newline
-\newpage
-	\begin{primer}
-	Problem zaustavljanja (eng.~{\em halting problem}) je neodlučiv \cite{haltingproblem}.
-	\end{primer}
-
-	\begin{primer}
-	Za prevođenje programa napisanih u programskom jeziku C može se koristiti GCC kompajler \cite{gcc}.
-	\end{primer}
-
-	\begin{primer}
-	 Da bi se ispitivala ispravost softvera, najpre je potrebno precizno definisati njegovo ponašanje \cite{laski2009software}. 
-	\end{primer}
-
-	Reference koje se koriste u ovom tekstu zadate su u datoteci {\em seminarski.bib}. Prevođenje u pdf format u Linux okruženju može se uraditi na sledeći način:
-	\begin{verbatim}
-	pdflatex TemaImePrezime.tex 
-	bibtex TemaImePrezime.aux 
-	pdflatex TemaImePrezime.tex 
-	pdflatex TemaImePrezime.tex 
-	\end{verbatim}
-	Prvo latexovanje je neophodno da bi se generisao {\em .aux} fajl. {\em bibtex} proizvodi odgovarajući {\em .bbl} fajl koji se koristi za generisanje literature. 
-	Potrebna su dva prolaza (dva puta pdflatex) da bi se reference ubacile u tekst (tj da ne bi ostali znakovi pitanja umesto referenci). Dodavanjem novih referenci potrebno je ponoviti ceo postupak.  
-
-
-	Broj naslova i podnaslova je proizvoljan. Neophodni su samo Uvod i Zaključak. Na poglavlja unutar teksta referisati se po potrebi. 
-	\begin{primer}
-	U odeljku \ref{sec:naslov1} precizirani su osnovni pojmovi, dok su zaključci dati u odeljku \ref{sec:zakljucak}.
-	\end{primer}
-
-	Još jednom da napomenem da nema razloga da pišete:
-	\begin{verbatim}
-	\v{s} i \v{c} i \'c ...
-	\end{verbatim}
-	Možete koristiti srpska slova
-	\begin{verbatim}
-	š i č i ć ... 
-	\end{verbatim}
-
-
-	Ovde pišem uvodni tekst.
-	Ovde pišem uvodni tekst. 
-	Ovde pišem uvodni tekst. 
-	Ovde pišem uvodni tekst. 
-
 
 	\section{Slike i tabele}
 	\label{slike_i_tabele}
@@ -388,56 +314,6 @@ Neki od napoznatijih alata za proveru modela su:
  \item ROMEO
 \end{enumerate}
 
-	\subsection{... podnaslov}
-	\label{subsec:podnaslovN}
-
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-
-	\section{n-ti naslov}
-	\label{sec:naslovN}
-
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-
-	\subsection{... podnaslov}
-	\label{subsec:podnaslovK}
-
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-
-	\subsection{... podnaslov}
-	\label{subsec:podnaslovM}
-
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-
-	\section{Poslednji naslov}
-	\label{sec:naslovM}
-
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-	Ovde pišem tekst. 
-
 	\section{Zaključak}
 	\label{sec:zakljucak}
 
@@ -459,14 +335,6 @@ Neki od napoznatijih alata za proveru modela su:
 	\appendix
 	\bibliography{seminarski} 
 	\bibliographystyle{plain}
-
-	\appendix
-	\section{Dodatak}
-	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
-	Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
 
 
 	\end{document}
