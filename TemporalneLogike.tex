@@ -21,15 +21,15 @@
 
 	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
-	\author{Djordje Todorovic, Stefan Zaric, Maksim Djurdjevac\\ mi12090@matf.bg.ac.rs, drugog (trećeg) autora}
+	\author {Djordje Todorovi\'{c}, Stefan Zari\'{c}, Maksim Djurdjevac\\ mi12090@matf.bg.ac.rs, drugog (trećeg) autora}
 	\date{8.~april 2017.}
 	\maketitle
 
 	\abstract{
-	Ovaj seminarski rad obradjuje temu temporalne logike, zapravo upotrebu logike u racunarstvu.
+	Ovaj seminarski rad obradjuje temu temporalne logike, zapravo upotrebu logike u računarstvu.
 	Preciznije su opisane osnove linarne temporalne logike (LTL) i logike stabla 
-	izracunavanja (CTL), osnovne primene ovih logika, takodje i najpoznatiji alati za proveravanje modela,
-	kao i ukratko mogucnosti alata ESBMC i neki primeri njegovih upotreba.
+	izračunavanja (CTL), osnovne primene ovih logika, takodje i najpoznatiji alati za proveravanje modela,
+	kao i ukratko mogućnosti alata ESBMC i neki primeri njegovih upotreba.
 
 	\tableofcontents
 
@@ -38,56 +38,56 @@
 	\section{Uvod}
 	\label{sec:uvod}
 
-	Glavni cilj upotrebe logike u racunarstvu je da se razviju jezici koji modeluju situacije koje srecemo kao profesionalci
-	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolicki, sto ce reci da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematicke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumacenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematickih problema koje srecemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srecemo svakodnevno u zivotu. Temporalne logike su logike koje opisuju rezonovanja u kojima je ukljuceno i vreme. Primena ovih logika je sve veca kako kod softverskih resenja, tako i kod kreiranja samog hardvera.
+	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci
+	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. Uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematićke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu. Temporalne logike su logike koje opisuju rezonovanja u kojima je uključeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera.
 
 	\newpage
 	\section{Linearne temporalne logike}
 	\label{sec:LTL}
 
 	\newline
-	Kao sto smo vec napomenuli, Temporalne logike ukljucuju u razmatranje i vreme, pa stoga cemo prvo opisati LTL model, linearne temporalne logike. Linearne temporalne logike predstavljaju beskonacan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logicku formulu koja opisuje skup beskonacnih sekvenci koje su tacne, tj. imaju vrednost 'True'. 
+	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje i vreme, pa stoga ćemo prvo opisati LTL model, linearne temporalne logike. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logicku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'. 
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoc precizno definisane sintakse. Ovu logiku odlikuje pojava razlicitih operatora, cijom upotrebom mozemo opisati razne modele vremena, ali nama ce za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logicki veznici, kojima mozemo opisati svako temporalnu logiku.\newline
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.\newline
 	\newline
 	Sintaksa
 	\newline
 	\newline
-	LTL formula je sacinjena od \newline
-		1) konacnog skupa atoma (a, b, x, y, ....) \newline
-		2) osnovnih logickih operatora (¬ (negation) , ∧ (conjunction)) \newline
+	LTL formula je sačinjena od \newline
+		1) konačnog skupa atoma (a, b, x, y, ....) \newline
+		2) osnovnih logičkih operatora (¬ (negation) , ∧ (conjunction)) \newline
 		3) osnovnih temporalnih operatora (O (next) , U (until) , true) \newline
-		4) Postoje i dodatni logicki operatori (∨ (disjunction), →(implication), ↔(equivalence)) \newline
-		5) Postoje i dodatni temporalni operatori ( □ (”always”) ♦ (”eventually”)) \newline
+		4) postoje i dodatni logički operatori (∨ (disjunction), →(implication), ↔(equivalence)) \newline
+		5) postoje i dodatni temporalni operatori ( □ (”always”) ♦ (”eventually”)) \newline
 
-	Kombinacijom navedenih mozemo dobiti slozenije operatore.
+	Kombinacijom navedenih možemo dobiti složenije operatore.
 
-	Navescemo jos neka pravila: \newline
+	Navešćemo još neka pravila: \newline
 
-		*) ♦ -> "F" Konacno sto znaci nesto u buducnosti \newline
-		*) □ -> "G" Globalno sto znaci globalno u buducnosti \newline
-		*) ○ -> "X" Sledeci put \newline
+		*) ♦ -> "F" Konačno što znači nešto u budućnosti \newline
+		*) □ -> "G" Globalno što znači globalno u budućnosti \newline
+		*) ○ -> "X" Sledeći put \newline
 
-	LTL moze biti prosireno sa operatorima proslosti \newline
+	LTL može biti prošireno sa operatorima prošlosti \newline
 		
-		*) □-1 -> Uvek u proslosti \newline
-		*) ♦-1 -> Ponekad u proslosti \newline
+		*) □-1 -> Uvek u prošlosti \newline
+		*) ♦-1 -> Ponekad u prošlosti \newline
 		*) ○-1 -> Prethodna sekvenca \newline
 
 	*) Weak until (a W b) \newline
-		-a ostaje True dok b ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) \newline
+		-a ostaje True dok b ne postane True, pri tom može zauvek ostati True (ne zahteva se da b ikad postane True) \newline
 	*) Release (a R b) \newline
-		-b ostaje True dok a ne postane True, pri tom moze zauvek ostati True (ne zahteva se da b ikad postane True) znaci suprotno od prethodnog \newline
+		-b ostaje True dok a ne postane True, pri tom može zauvek ostati True (ne zahteva se da b ikad postane True) znači suprotno od prethodnog \newline
 
 	Semantika
 	\newline
 	\newline
-	Sintaksa logike je definisala kako nesto mozemo zapisati ispravno, a semantika daje znacenje istom.
-	Vrste sistema koje obicno modelujemo uz pomoc LTL-a mozemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja staticku strukturu i trannziciju, sto predstavlja dinamicku strukturu.
-	LTL formula φ oznacava svojstva puteva (traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
-	Semantika formule φ je definisana kao jezik(φ) gde on sadrzi beskonacnan skup reci koje zadovoljavaju φ.
+	Sintaksa logike je definisala kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
+	Vrste sistema koje obično modelujemo uz pomoć LTL-a možemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja statičku strukturu i trannziciju, sto predstavlja dinamičku strukturu.
+	LTL formula φ označava svojstva puteva (traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
+	Semantika formule φ je definisana kao jezik(φ) gde on sadrži beskonačnan skup reči koje zadovoljavaju φ.
 
-	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponasanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
+	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
 
 	TS zadovoljava ϕ ako TS zadovoljava LT svojstva dedfinisana na Jezik(ϕ).
 	}
@@ -99,37 +99,37 @@
 	\newline
 	\newline
 	U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. paths). Definisali smo da je stanica(state) sistema
-	zadovoljava jednu LTL formulu ako svi putevi iz te stanice(state) zadovoljavaju istu. U ovoj strukturi drveta buduci koraci jos nisu
-	odredjeni, jer postoji vise puteva koji potencijalno mogu biti 'iskoriscena'.
-	CTL nam omogucava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
-	A i E koji opisuju sve puteve(all paths) i postojece puteve (exists paths). 
+	zadovoljava jednu LTL formulu ako svi putevi iz te stanice(state) zadovoljavaju istu. U ovoj strukturi drveta budući koraci još nisu
+	odredjeni, jer postoji više puteva koji potencijalno mogu biti 'iskorišćena'.
+	CTL nam omogućava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
+	A i E koji opisuju sve puteve(all paths) i postojeće puteve (exists paths). 
 	\newline
 	\newline
 	Sintaksa
 	\newline
 	\newline
-	CTL (eng Computation tree logic) koristi logiku stabla pri izracunavanju. 
-	Kao pre, radimo sa konacnim skupom atomickih formula (kao sto su p, q, r,...,p1,p2,p3...).
+	CTL (eng Computation tree logic) koristi logiku stabla pri izračunavanju. 
+	Kao pre, radimo sa konačnim skupom atomičkih formula (kao što su p, q, r,...,p1,p2,p3...).
 
-	Definisemo CTL formulu:
+	Definišemo CTL formulu:
 
 	ϕ ::= T | neT | p | (neϕ) | (ϕ /\ ϕ) | (ϕ \/ ϕ) | (ϕ -> ϕ) | AXϕ | EXϕ | Afϕ | EFϕ | AGϕ | EGϕ | A[ϕ U ϕ] | E[ϕ U ϕ]
 
-	gde je p iz konackog skupa atomickih formula.
+	gde je p iz konačkog skupa atomičkih formula.
 	\newline
 	\newline
 	Semantika
 	\newline
 	\newline
 	CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je M = (S, ->, L) neki model, s e S i ϕ CTL formula.
-	Definicija modela bi bila sledeca
+	Definicija modela bi bila sledeća:
 
-		1) Ako je ϕ atomicka, zadovoljivost je razresena preko L \newline
-		2) Ako veznik najviseg prioriteta formule ϕ je bulovski veznik tada se pitanje zadovoljivosti razresava
-		   preko uobicajne istinitosne tablice i rekurzije nad drvetom formule ϕ \newline
-		3) Ako je veznik najviseg prioriteta neki operator koji pocinje sa A, tada zadovoljivost jeste ispunjena ako
+		1) Ako je ϕ atomička, zadovoljivost je razrešena preko L \newline
+		2) Ako veznik najvišeg prioriteta formule ϕ je bulovski veznik tada se pitanje zadovoljivosti razrešava
+		   preko uobičajne istinitosne tablice i rekurzije nad drvetom formule ϕ \newline
+		3) Ako je veznik najvišeg prioriteta neki operator koji počinje sa A, tada zadovoljivost jeste ispunjena ako
 		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A \newline
-		4) Slicno ako je veznik najviseg prioriteta neki operator koji pocinje sa E, ada zadovoljivost jeste ispunjena ako
+		4) Slično ako je veznik najvišeg prioriteta neki operator koji počinje sa E, ada zadovoljivost jeste ispunjena ako
 		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E \newline
 
 	\newpage
