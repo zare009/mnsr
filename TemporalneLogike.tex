@@ -21,7 +21,7 @@
 
 	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
-	\author {Đorđe Todorović, Stefan Zarić, Maksim Đurđevac\\ mi12090@matf.bg.ac.rs, mi11362@alas.matf.bg.ac.rs}
+	\author {Đorđe Todorović, Stefan Zarić, Maksim Đurđevac\\ mi12090@matf.bg.ac.rs, mi12147@alas.matf.bg.ac.rs, mi11362@alas.matf.bg.ac.rs}
 	\date{8.~april 2017.}
 	\maketitle
 
@@ -152,79 +152,71 @@ Ukoliko je vI,s(A) = >, pišemo I, s |= A ili samo s |= A. U suprotnom pišemo I
 	\section{Primena temporalnih logika u proveravanju modela}
 	\label{sec:MC}
 
-	Temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne moze naci u stanju deadlocka. 
-	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom temporalne logike. 
-	Svaki zahtev u specifikaciji moze se predstaviti jednom formulom linearne temporalne logike i moze se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
-	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tacna u toj strukturi, odnosno da li program ispunjava specifikaciju.
-	Algoritam linearne temporalne logike za proveru modela je procedura koja vraca "da" za dati tranzicioni sistem TS i formulu ϕ ako je TS |= ϕ, odnosno "ne" ako TS nije model formule ϕ.
+\subsection{LTL}
+	\label{subsec:prLTL}
+	Linearna temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne može naći u stanju mrtve petlje. 
+	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom linearne temporalne logike. 
+	Svaki zahtev u specifikaciji može se predstaviti jednom formulom linearne temporalne logike i može se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
+	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tačna u toj strukturi, odnosno da li program ispunjava specifikaciju.
+	Algoritam linearne temporalne logike za proveru modela je procedura koja vraća "da" za dati tranzicioni sistem TS i formulu \phi ako je TS |= \phi, odnosno "ne" ako TS nije model formule \phi.
 
-	Prednosti i mane koriscenja provere modela.
+	Prednosti i mane korišćenja provere modela.
 
 	Prednosti: \newline
 	- Nema potrebe za formalnim dokazima korektnosti. \newline
 	- Brzina, u poredjenju sa drugim metodima verifikacije. \newline
-	- Ako specifikacija nije zadovoljena bice generisan kontraprimer koji ce pokazati zasto specifikacija nije ispunjena. \newline
-	- Moguce je proveriti ispunjenost zahteva i pre nego sto je ceo sistem zavrsen, tako da se moze vrsiti provera modela tokom izrade veceg sistema. \newline
-	- Koriscenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
+	- Ako specifikacija nije zadovoljena biće generisan kontraprimer koji ce pokazati kako se došlo u to stanje i onda se može zaključiti zasto specifikacija nije ispunjena. \newline
+	- Moguce je proveriti ispunjenost zahteva i pre nego što je ceo sistem završen, tako da se moze vršiti provera modela tokom izrade većeg sistema. \newline
+	- Korišćenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. \newline
 	Mane: \newline
-	- Zadavanje specifikacija formulama linearne temporalne logike moze da bude komplikovano. \newline
+	- Zadavanje specifikacija formulama linearne temporalne logike može da bude komplikovano. \newline
 	- Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. \newline
-	- Broj stanja u kome sistem moze da se nadje moze biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
+	- Broj stanja u kome sistem može da se nađe može biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. \newline
 
 	Algoritam za proveru modela upotrebom automata i linearne temporalne logike
 
-	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula ϕ \newline
-	Izlaz: "da" ako je TS |= ϕ; inace, “ne” i generisan kontraprimer \newline
+	Ulaz: konacni automat (tranzicioni sistem TS) i LTL formula \phi \newline
+	Izlaz: "da" ako je TS |= \phi; inace, “ne” i generisan kontraprimer \newline
 
-	Konstruisati NBA[\ref] A¬ϕ tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
+	Konstruisati NBA[referenca4] A\neg\phi tako da Lω(A¬ϕ) = Words(¬ϕ) \newline
 	Konstruisati tranzicioni sistem TS⊗A \newline
 
-	if postoji put π u TS⊗A koji zadovoljava uslov ispunjenosti A then \newline
+	if postoji put π u TS \circ A koji zadovoljava uslov ispunjenosti A then \newline
 	return "ne" i an expressive prefix of π \newline
 	else \newline
 	return "da" \newline
 	fi \newline
 
-	\section{Slike i tabele}
-	\label{slike_i_tabele}
+\subsection{CTL}
+	\label{subsec:prCTL}
+	
+Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela.[referenca1]
+Dakle model sistema je dat kao struktura, konacan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
+Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu.[referenca2]
 
-	Slike i tabele treba da budu u svom okruženju, sa odgovarajućim naslovima, obeležene labelom da koje omogućava referenciranje. 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=1.5]{ltlctl.png}
+\end{center}
+\caption{Izražajnost LTL i CTL}
+\label{fig:ltlctlex}
+\end{figure}
 
-	\begin{primer} Ovako se ubacuje slika. Obratiti pažnju da je dodato i 
-	\begin{verbatim}
-	\usepackage{graphicx}
-	\end{verbatim}
-
-	\begin{figure}[h!]
-	\begin{center}
-	\includegraphics[scale=0.75]{panda.jpg}
-	\end{center}
-	\caption{Pande}
-	\label{fig:pande}
-	\end{figure}
-
-	Na svaku sliku neophodno je referisati se negde u tekstu. Na primer, na slici \ref{fig:pande} prikazane su pande. 
-	\end{primer}
-
-	\begin{primer} I tabele treba da budu u svom okruženju, i na njih je neophodno referisati se u tekstu. Na primer, u tabeli \ref{tab:tabela1} su prikazana različita poravnanja u tabelama.
-
-	\begin{table}[h!]
-	\begin{center}
-	\caption{Razlčita poravnanja u okviru iste tabele ne treba koristiti jer su nepregledna.}
-	\begin{tabular}{|c|l|r|} \hline
-	centralno poravnanje& levo poravnanje& desno poravnanje\\ \hline
-	a &b&c\\ \hline
-	d &e&f\\ \hline
-	\end{tabular}
-	\label{tab:tabela1}
-	\end{center}
-	\end{table}
-
-	\end{primer}
-
-
-
-
+Algoritam: \newline
+Model checking \newline
+Implementation \newline
+\newline
+1. Define the system model M containing traces over the set Prop of propositions. \newline \newline
+2. Let specification \phi be a formula over the set Prop. \newline \newline
+3. Check that M |H \phi: \newline \newline
+• Translate the specification \not\phi into a Büchi automaton A\not\phi and compose it with the
+system model M to form AM, \not\phi
+. \newline \newline
+• Check AM, \not\phi
+for nonemptiness. That is, search for a trace that is accepted by AM, \not\phi \newline \newline
+.
+– If such a trace exists, return it as a counterexample. \newline \newline
+– If no such trace exists, return TRUE. \newline \newline
 
 	\section{ESBMC verifikacioni alat}
 	\label{sec:ESBMC}
