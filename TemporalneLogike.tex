@@ -60,9 +60,9 @@
 	\label{sec:LTL}
 
 	%\newline
-	Kao što smo već napomenuli, temporalne logike uključuju u razmatranje  vreme, i takođe smo pomenuli neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\newline
+	Kao što smo već napomenuli, temporalne logike uključuju u razmatranje  vreme, i takođe smo pomenuli neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\cite{reeves1990logic}\newline
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.\cite{reeves1990logic}
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 %	\newline
@@ -137,9 +137,9 @@ Neka je A neka LTL formula. Tada:
 \item Formula A je LTL-valjana ako za sve interpretacije $I = (S, \rho)$ i sva stanja $s \in S$, važi $I, s |= A$. U tom slučaju pišemo $|= A$.\end{enumerate}	
 \end{definicija}
 
-	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
+	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P. \cite{reeves1990logic}
 
-	TS zadovoljava $\phi$ ako TS zadovoljava LT svojstva dedfinisana na Jezik($\phi$).
+	TS zadovoljava $\phi$ ako TS zadovoljava LT svojstva dedfinisana na Jezik($\phi$).\cite{reeves1990logic}
 
 
 	\section{Logike stabla izracunavanja}
