@@ -8,7 +8,7 @@
 	\usepackage[utf8]{inputenc} % make weird characters work
 	\usepackage{graphicx}
 	\usepackage{amsmath}
-
+	\usepackage{amssymb}
 
 
 	\usepackage[english,serbian]{babel}
@@ -33,7 +33,7 @@
 
 	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
-	\author {Đorđe Todorović, Stefan Zarić, Maksim Đurđevac\\ mi12090@matf.bg.ac.rs, mi12147@alas.matf.bg.ac.rs, mi11362@alas.matf.bg.ac.rs}
+	\author {Đorđe Todorović  mi12090@matf.bg.ac.rs, \\ Stefan Zarić mi12147@alas.matf.bg.ac.rs, \\ Maksim Đurđevac  mi11362@alas.matf.bg.ac.rs}
 	\date{8.~april 2017.}
 	\maketitle
 
@@ -124,8 +124,8 @@ Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula, $I = (S, \rho)$ neka in
 \item  $vI,s(B \vee C) = vI,s(B) \wedge vI,s(C)$
 \item $vI,s(B \Rightarrow C) = vI,s(B) \Rightarrow vI,s(C)$
 \item $vI,s(B \Leftrightarrow C) = (vI,s(B) \Leftrightarrow vI,s(C))$
-\item  $vI,s(\Box B) = \top$ akko $vI,t(B) = \top$, za sve $t \in (s)$
-\item $vI,s(\Diamond B) = \top$ akko $vI,t(B) = \top$, za neki $t \in \rho(s)$.
+\item  $vI,s(\square B) = \top$ akko $vI,t(B) = \top$, za sve $t \in (s)$
+\item $vI,s(\diamond B) = \top$ akko $vI,t(B) = \top$, za neki $t \in \rho(s)$.
 \end{enumerate}	
 Ukoliko je $vI,s(A) = \top$, pišemo $I, s |= A$ ili samo $s |= A$. U suprotnom pišemo $I, s 6|= A$.
 \end{definicija} 
@@ -209,16 +209,14 @@ CTL (eng. Computation tree logic) koristi logiku stabla pri izračunavanju.
 \end{itemize}	
 
 
-Algoritam za proveru modela upotrebom automata i linearne temporalne logike je naveden u algoritmu \ref{alg:katl}. O NBA automatima koji se koriste u ovom algoritmu može se pročitati u \cite{alur1994theory}.%[referenca4] 
+Algoritam za proveru modela upotrebom automata i linearne temporalne logike je naveden u algoritmu \ref{alg:katl}. O NBA automatima koji se koriste u ovom algoritmu može se pročitati u \cite{alur1994theory}.
 
 \begin{megaalgorithm}
 \caption{Algoritam za proveru modela upotrebom automata i linearne temporalne logike}\label{alg:katl}
-% \DontPrintSemicolon
-%  \KwData{$G=(X,U)$ such that $G^{tc}$ is an order.}
- % \KwResult{$G’=(X,V)$ with $V\subseteq U$ such that $G’^{tc}$ is an interval order.}
-\textbf{Ulaz: }konacni automat (tranzicioni sistem TS) i LTL formula $\phi$ 
 
-\textbf{Izlaz:} DA ako je TS |= $\phi$; inace, NE i generisan kontraprimer 
+\textbf{Ulaz: }konačni automat (tranzicioni sistem TS) i LTL formula $\phi$ 
+
+\textbf{Izlaz:} DA ako je TS |= $\phi$; inače, NE i generisan kontraprimer 
 
 \Indp Konstruisati NBA $A\neg\phi$ tako da $L_\omega (A\neg \phi) = Words(\neg \phi)$
 
@@ -241,7 +239,7 @@ Algoritam za proveru modela upotrebom automata i linearne temporalne logike je n
 	\label{subsec:prCTL}
 	
 Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela \cite{rozier2011linear}
-Dakle model sistema je dat kao struktura, konacan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
+Dakle model sistema je dat kao struktura, konačan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
 Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu \cite{abate2007one}.%[referenca2]
 
 \begin{figure}[h!]
@@ -261,7 +259,7 @@ Algoritam \ref{alg:kaCTL} predstavlja algoritam za proveru modela upotrebom auto
  % \KwResult{$G’=(X,V)$ with $V\subseteq U$ such that $G’^{tc}$ is an interval order.}
 \textbf{Ulaz: }konacni automat (tranzicioni sistem TS) i CTL formula $\phi$ 
 
-\textbf{Izlaz:} DA ako je TS |= $\phi$; inace, NE i generisan kontraprimer 
+\textbf{Izlaz:} DA ako je TS |= $\phi$; inače, NE i generisan kontraprimer 
 
 \Indp  Definisati model sistema$M$ koji sadrži putanje do svih stanja na osnovu skupa svih zahteva $Prop$
 
