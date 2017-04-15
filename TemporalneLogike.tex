@@ -117,25 +117,26 @@ Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula. Interpretacija te formu
 \end{definicija}
 \begin{definicija}    
 Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula, $I = (S, \rho)$ neka interpretacija formule $A$, i $s \in S$. Tada definišemo $vI$, $s(A) \in \{>, \perp \}$, tzv. vrednost formule $A$ za interpretaciju $I$, u stanju $s$, na sledeći način:
-%\begin{enumerate}	
-%\item  Ako je p ∈ P onda vI,s(p) = s(p)
-%\item vI,s(¬B) = > akko vI,s(B) = ⊥
-%\item  vI,s(B ∨ C) = vI,s(B) ∨ vI,s(C)
-%\item  vI,s(B ∧ C) = vI,s(B) ∧ vI,s(C)
-%\item vI,s(B ⇒ C) = vI,s(B) ⇒ vI,s(C)
-%\item vI,s(B ⇔ C) = (vI,s(B) ⇔ vI,s(C))
-%\item  vI,s(B) = > akko vI,t(B) = >, za sve t ∈ ρ(s)
-%\item vI,s(♦B) = > akko vI,t(B) = >, za neki t ∈ ρ(s).
-%\end{enumerate}	
-%Ukoliko je vI,s(A) = >, pišemo I, s |= A ili samo s |= A. U suprotnom pišemo I, s 6|= A.
+\begin{enumerate}	
+\item  Ako je $p \in P$ onda $vI,s(p) = s(p)$
+\item $vI,s(\not B) = \top$ akko $vI,s(B) = \bot$
+\item  $vI,s(B \vee C) = vI,s(B) \wedge vI,s(C)$
+\item  $vI,s(B \vee C) = vI,s(B) \wedge vI,s(C)$
+\item $vI,s(B \Rightarrow C) = vI,s(B) \Rightarrow vI,s(C)$
+\item $vI,s(B \Leftrightarrow C) = (vI,s(B) \Leftrightarrow vI,s(C))$
+\item  $vI,s(\Box B) = \top$ akko $vI,t(B) = \top$, za sve $t \in (s)$
+\item $vI,s(\Diamond B) = \top$ akko $vI,t(B) = \top$, za neki $t \in \rho(s)$.
+\end{enumerate}	
+Ukoliko je $vI,s(A) = \top$, pišemo $I, s |= A$ ili samo $s |= A$. U suprotnom pišemo $I, s 6|= A$.
 \end{definicija} 
 \begin{definicija}
 Neka je A neka LTL formula. Tada:
-%\begin{enumerate}	
-%\item Kažemo da je A zadovoljiva ako postoji interpretacija$I = (S, \rho)$ za A i neko stanje $s \in S$ tako da je vI,s(A) = > tj. I, s |= A.
-%\item Ako je I = (S, ρ) i postoji s ∈ S tako da je I, s |= A, onda kažemo da je I model za A i pišemo I |= A.
-%\item Formula A je LTL-valjana ako za sve interpretacije I = (S, ρ) i sva stanja s ∈ S, važi I, s |= A. U tom slučaju pišemo |= A.\end{enumerate}	
+\begin{enumerate}	
+\item Kažemo da je A zadovoljiva ako postoji interpretacija$I = (S, \rho)$ za A i neko stanje $s \in S$ tako da je $vI,s(A) = \top$ tj. $I, s |= A$.
+\item Ako je $I = (S, \rho)$ i postoji $s \in S$ tako da je $I, s |= A$, onda kažemo da je I model za A i pišemo $I |= A$.
+\item Formula A je LTL-valjana ako za sve interpretacije $I = (S, \rho)$ i sva stanja $s \in S$, važi $I, s |= A$. U tom slučaju pišemo $|= A$.\end{enumerate}	
 \end{definicija}
+
 	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P.
 
 	TS zadovoljava $\phi$ ako TS zadovoljava LT svojstva dedfinisana na Jezik($\phi$).
