@@ -60,9 +60,9 @@
 	\label{sec:LTL}
 
 	%\newline
-	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\cite{reeves1990logic}\newline
+	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam \emph{linearno temporalno svojstvo} (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost \emph{True}.\cite{reeves1990logic}\newline
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika.\cite{reeves1990logic}
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika.\cite{reeves1990logic}
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 %	\newline
@@ -106,9 +106,9 @@ Formula Linearne temporalne logike je sačinjena od:
 	\label{subsec:podnaslovN}
 	
 	Sintaksa logike je definiše kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
-	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{prelazak}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S).\cite{reeves1990logic}
+	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{tranzicija}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S).\cite{reeves1990logic}
 	
-	LTL formula $\varphi$ označava svojstva stanja i jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
+	LTL formula $\varphi$ označava svojstva stanja, dok jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
 	
 	Semantika formule $\varphi$ je definisana kao jezik($\varphi$) gde on sadrži beskonačnan skup reči koje zadovoljavaju $\varphi$.\newline
 	
@@ -144,7 +144,7 @@ Neka je A neka LTL formula. Tada:
 	TS zadovoljava $\phi$ ako TS zadovoljava LT svojstva dedfinisana na Jezik($\phi$).\cite{reeves1990logic}
 
 
-	\section{Logike stabla izracunavanja}
+	\section{Logike stabla izračunavanja}
 	\label{sec:CTL}
 	U LTL analizi smo zapazili da je LTL formula evaluirana preko stanja. Definisali smo da stanje sistema
 	zadovoljava jednu LTL formulu ako sva stanja koja proizilaze iz njega zadovoljavaju istu. CTL(eng. \emph{Computation tree logic}) je logika koja je predstavljena strukturom drveta i u njoj budući koraci još nisu
@@ -177,7 +177,7 @@ Neka je A neka LTL formula. Tada:
 		   preko uobičajne istinitosne tablice i rekurzije nad drvetom formule $\phi$
 \item  Ako je veznik najvišeg prioriteta neki operator koji počinje sa A, tada zadovoljivost jeste ispunjena ako
 		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A 
-\item  Slično ako je veznik najvišeg prioriteta neki operator koji počinje sa E, ada zadovoljivost jeste ispunjena ako
+\item  Slično ako je veznik najvišeg prioriteta neki operator koji počinje sa E, tada zadovoljivost jeste ispunjena ako
 		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E 
 \end{enumerate}	
 
@@ -392,7 +392,7 @@ Neki od napoznatijih alata za proveru modela su:
 	\section{Zaključak}
 	\label{sec:zakljucak}
 
-Greške su sastavni deo svakog rada i tako se i u računarstvu javljaju kao svuda. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su ekspanziji, njihovom razvoju se sve više i više pridaje na značaju, i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, i diskutovati o prednostima i manama istih.
+Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u računarstvu sasvim uobičajeno. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su ekspanziji, njihovom razvoju se sve više i više pridaje na značaju, i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, i diskutovati o prednostima i manama istih, i eventualno dati predloge za unapređivanje istih.
 
 
 	\addcontentsline{toc}{section}{Literatura}
