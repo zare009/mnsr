@@ -33,17 +33,16 @@
 
 	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
-	\author {Đorđe Todorović  mi12090@matf.bg.ac.rs, \\ Stefan Zarić mi12147@alas.matf.bg.ac.rs, \\ Maksim Đurđevac  mi11362@alas.matf.bg.ac.rs}
+	\author {Đorđe Todorović  mi12090@alas.matf.bg.ac.rs, \\ Stefan Zarić mi12147@alas.matf.bg.ac.rs, \\ Maksim Đurđevac  mi11362@alas.matf.bg.ac.rs}
 	\date{8.~april 2017.}
 	\maketitle
 
 	\abstract{
-	Ovaj seminarski rad obrađuje temu temporalne logike, zapravo upotrebu logike u računarstvu,za čiju upotrebu
+	Seminarski rad obrađuje temu \emph{Temporalne logike}, tačnije upotrebu logike u računarstvu za čiju upotrebu
 	veoma bitnu ulogu ima vreme.
-	Preciznije su opisane osnove linarne temporalne logike (LTL) i logike stabla 
-	izračunavanja (CTL), osnovne primene ovih logika, takođe su navedeni i najpoznatiji alati za proveravanje modela,
-	kao i ukratko mogućnosti alata ESBMC i neki primeri njegovih upotreba.
-
+	Preciznije su opisane osnove \emph{Linearne temporalne logike (LTL)} i \emph{Logike stabla 
+	izračunavanja (CTL)}, osnovne primene ovih logika, a takođe su navedeni i najpoznatiji alati za proveravanje modela,
+	kao i mogućnosti alata ESBMC.
 	\tableofcontents
 
 	\newpage
@@ -51,27 +50,28 @@
 	\section{Uvod}
 	\label{sec:uvod}
 
-	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci
-	u toj oblasti, u nekom formalnom obliku. Razlozi za to su da damo formalne pravila za prepoznavanje koji su argumenti ispravni,tj. validni, a koji ne. Uska je povezanost pojmova Temporalna logika i iskazna logika, gde takodje imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju odredjene matematićke objekte. Sintaksa jezika definise skup validnih simbola koji se mogu upotrebljavati kako bi se kreirali takodje validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali cesto imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu. Temporalne logike su logike koje opisuju rezonovanja u kojima je uključeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera.\newline
+	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci u toj oblasti, ali u nekom formalnom obliku. Glavni cilj je zadati formalna pravila za ispitivanje validnosti zadatih argumenata.\newline
+	 
+	Uska je povezanost pojmova \emph{Temporalna logika} i \emph{Iskazna logika}, gde takođe imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju određene matematičke objekte. Sintaksa jezika definiše skup validnih simbola koji se mogu upotrebljavati i kombinovati kako bi se kreirali takođe validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali često imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu.
 	
-	Temporalne logike su sve značajnije u oblasti Informacionih tehnologija, tj. računarstvu, jer se ponašanje i hardvera i softvera opisuje u zavisnosti od vremena. Rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd. Vreme u temporalnoj logici modelujemo upotrebom različitih operatora. Osnovne vrste ovih logika jesu Linearne temporalne logike(LTL) i Logike stabla odlučivanja(CTL), ali u daljem tekstu će ova dve vrste biti detaljnije obrađene.
+	Temporalne logike su logike koje opisuju rezonovanja u kojima je uklju-čeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera. One su sve značajnije u oblasti Informacionih tehnologija, tj. računarstvu, jer se ponašanje i hardvera i softvera opisuje u zavisnosti od vremena. Preko njih se između ostalog opisuje i rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd. Vreme u Temporalnoj logici modelujemo upotrebom različitih operatora. Osnovne vrste ovih logika jesu \emph{Linearne temporalne logike(LTL)} i \emph{Logike stabla odlučivanja(CTL)}, a u daljem tekstu će ove dve vrste biti detaljnije obrađene.
 
 	\section{Linearne temporalne logike}
 	\label{sec:LTL}
 
 	%\newline
-	Kao što smo već napomenuli, temporalne logike uključuju u razmatranje  vreme, i takođe smo pomenuli neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\cite{reeves1990logic}\newline
+	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam 'linearno temporalno svojstvo' (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost 'True'.\cite{reeves1990logic}\newline
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svako temporalnu logiku.\cite{reeves1990logic}
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tkzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika.\cite{reeves1990logic}
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 %	\newline
 	
-Sintaksa jezika proučava pravila koja određuju kako se elementi tog jezika na pravilan način mogu kombinovati i stvarati takođe ispravni element. Kombinacijom operatora i iskaznih slova dobijamo logičke formule.
+Sintaksa proučava pravila koja određuju kako se strukturni elementi jezika na pravilan način mogu kombinovati i stvarati takođe ispravan složeniji element. Kombinacijom operatora i atoma dobijamo logičke formule.\newline
 
-Formula linearne temporalne logike je sačinjena od: 
+Formula Linearne temporalne logike je sačinjena od: 
 \begin{enumerate}
-\item Konačnog skupa atoma $(a, b, x, y, ....)$
+\item  Konačnog skupa atoma $(a, b, x, y, ....)$
 \item  Osnovnih logičkih operatora ($\not$ (negation) , $\wedge$ (conjunction)) 
 \item  Osnovnih temporalnih operatora (O (next) , U (until) , true) 
 \item  Postoje i dodatni logički operatori ($\vee$ (disjunction), $\rightarrow$(implication), $\leftrightarrow$(equivalence))
@@ -80,18 +80,19 @@ Formula linearne temporalne logike je sačinjena od:
 
 	Kombinacijom navedenih možemo dobiti složenije operatore. Stoga ćemo navesti još neka pravila:
 \begin{enumerate}	
-\item  'F', što znači nešto konačno u budućnosti 
-\item  'G', što znači nešto globalno u budućnosti 
-\item  'X', što znači nešto sledeći put 
-\end{enumerate}
-	LTL može biti prošireno sa operatorima prošlosti: 
-\begin{enumerate}	
-\item  -> Uvek u prošlosti 
-\item  -> Ponekad u prošlosti 
-\item  -> Prethodna sekvenca 
+\item $\square \rightarrow 'F'$, što znači nešto konačno u budućnosti 
+\item $\lozenge \rightarrow 'G'$, što znači nešto globalno u budućnosti 
+\item $\circ \rightarrow 'X'$, što znači nešto sledeći put 
 \end{enumerate}
 
-Takođe ćemo napomenuti i pravila 'weak until' i 'release':
+	LTL može biti prošireno sa operatorima prošlosti: 
+\begin{enumerate}	
+\item $\square^1 \rightarrow $ Uvek u prošlosti  %ovde treba na -1 dodati!!!!!
+\item $\lozenge^1 \rightarrow $  Ponekad u prošlosti 
+\item $\circ^1 \rightarrow $ Prethodna sekvenca 
+\end{enumerate}
+
+   Takođe ćemo napomenuti i pravila 'weak until' i 'release':
 \begin{enumerate}	
 \item  Weak until (a W b)
 
@@ -104,61 +105,62 @@ Takođe ćemo napomenuti i pravila 'weak until' i 'release':
 	\subsection{Semantika}
 	\label{subsec:podnaslovN}
 	
-	Sintaksa logike je definisala kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
-	Vrste sistema koje obično modelujemo uz pomoć LTL-a možemo nazvati translacionim sistemima (TS). Razaznajemo pojmove stanica, sto predstavlja statičku strukturu i trannziciju, sto predstavlja dinamičku strukturu.
-	LTL formula $\varphi$ označava svojstva puteva (eng. traces) i jedan konkretan put moze biti potpuna LTL formula a i ne mora.
-	Semantika formule $\varphi$ je definisana kao jezik($\varphi$) gde on sadrži beskonačnan skup reči koje zadovoljavaju $\varphi$.
+	Sintaksa logike je definiše kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
+	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{prelazak}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S).\cite{reeves1990logic}
 	
-	Radi lakšeg razumevanja značenja temporalnih logika uvešćemo neke opšte definicije logike, koje između ostalog važi i za linearne temporalne logike.
+	LTL formula $\varphi$ označava svojstva stanja i jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
+	
+	Semantika formule $\varphi$ je definisana kao jezik($\varphi$) gde on sadrži beskonačnan skup reči koje zadovoljavaju $\varphi$.\newline
+	
+	Radi lakšeg razumevanja značenja Temporalnih logika navešćemo neke opšte definicije logike, koje između ostalog važe i za Linearne temporalne logike.
 
 	Kao i u klasičnoj iskaznoj logici, ako je A neka formula, onda zapis $A = A(p_1, p_2, \dots , p_n)$ znači da su sva iskazna slova formule $A$ u skupu $\{p_1, p_2, \dots , p_n\}$.
 \begin{definicija}
 Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula. Interpretacija te formule je svaki uređen par $I = (S, \rho)$, gde je $S$ skup svih valuacija $s : \{p_1, p_2, \dots , p_n\} \to \{>, \perp \}$, tzv. stanja, a $\rho \subset S2$ binarna relacija na skupu stanja (tzv. funkcija prelaska).
 \end{definicija}
 \begin{definicija}    
-Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula, $I = (S, \rho)$ neka interpretacija formule $A$, i $s \in S$. Tada definišemo $vI$, $s(A) \in \{>, \perp \}$, tzv. vrednost formule $A$ za interpretaciju $I$, u stanju $s$, na sledeći način:
+Neka je $A = A(p_1, p_2, \dots , p_n)$ neka LTL formula, $I = (S, \rho)$ neka interpretacija formule $A$, i $s \in S$. Tada definišemo $v_I$, $s(A) \in \{>, \perp \}$, tzv. vrednost formule $A$ za interpretaciju $I$, u stanju $s$, na sledeći način:
 \begin{enumerate}	
-\item  Ako je $p \in P$ onda $vI,s(p) = s(p)$
-\item $vI,s(\not B) = \top$ akko $vI,s(B) = \bot$
-\item  $vI,s(B \vee C) = vI,s(B) \wedge vI,s(C)$
-\item  $vI,s(B \vee C) = vI,s(B) \wedge vI,s(C)$
-\item $vI,s(B \Rightarrow C) = vI,s(B) \Rightarrow vI,s(C)$
-\item $vI,s(B \Leftrightarrow C) = (vI,s(B) \Leftrightarrow vI,s(C))$
-\item  $vI,s(\square B) = \top$ akko $vI,t(B) = \top$, za sve $t \in (s)$
-\item $vI,s(\diamond B) = \top$ akko $vI,t(B) = \top$, za neki $t \in \rho(s)$.
+\item  Ako je $p \in P$ onda $v_I,s(p) = s(p)$
+\item $v_I,s(\not B) = \top$ akko $v_I,s(B) = \bot$
+\item  $v_I,s(B \vee C) = v_I,s(B) \wedge v_I,s(C)$
+\item  $v_I,s(B \vee C) = v_I,s(B) \wedge v_I,s(C)$
+\item $v_I,s(B \Rightarrow C) = v_I,s(B) \Rightarrow v_I,s(C)$
+\item $v_I,s(B \Leftrightarrow C) = (v_I,s(B) \Leftrightarrow v_I,s(C))$
+\item  $v_I,s(\square B) = \top$ akko $v_I,t(B) = \top$, za sve $t \in (s)$
+\item $v_I,s(\diamond B) = \top$ akko $v_I,t(B) = \top$, za neki $t \in \rho(s)$.
 \end{enumerate}	
-Ukoliko je $vI,s(A) = \top$, pišemo $I, s |= A$ ili samo $s |= A$. U suprotnom pišemo $I, s 6|= A$.
+Ukoliko je $v_I,s(A) = \top$, pišemo $I, s \models A$ ili samo $s \models A$. U suprotnom pišemo $I, s \nvDash A$.
 \end{definicija} 
 \begin{definicija}
 Neka je A neka LTL formula. Tada:
 \begin{enumerate}	
-\item Kažemo da je A zadovoljiva ako postoji interpretacija$I = (S, \rho)$ za A i neko stanje $s \in S$ tako da je $vI,s(A) = \top$ tj. $I, s |= A$.
-\item Ako je $I = (S, \rho)$ i postoji $s \in S$ tako da je $I, s |= A$, onda kažemo da je I model za A i pišemo $I |= A$.
-\item Formula A je LTL-valjana ako za sve interpretacije $I = (S, \rho)$ i sva stanja $s \in S$, važi $I, s |= A$. U tom slučaju pišemo $|= A$.\end{enumerate}	
+\item Kažemo da je A zadovoljiva ako postoji interpretacija $I = (S, \rho)$ za A i neko stanje $s \in S$ tako da je $v_I,s(A) = \top$ tj. $I, s \models A$.
+\item Ako je $I = (S, \rho)$ i postoji $s \in S$ tako da je $I, s \models A$, onda kažemo da je I model za A i pišemo $I \models A$.
+\item Formula A je LTL-valjana ako za sve interpretacije $I = (S, \rho)$ i sva stanja $s \in S$, važi $I, s \models A$. U tom slučaju pišemo $\models A$.\end{enumerate}	
 \end{definicija}
 
-	TS zadovoljava LT svojstvo P ako svi njegove stanice zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanica zadovoljava P kadgod svi putevi koji su krenuli iz te stanice zadovoljavaju P. \cite{reeves1990logic}
-
+	TS zadovoljava LT svojstvo P ako sva njegova stanja zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanje zadovoljava P kad god sva stanja koja su proizišla iz njega zadovoljavaju P.\newline
 	TS zadovoljava $\phi$ ako TS zadovoljava LT svojstva dedfinisana na Jezik($\phi$).\cite{reeves1990logic}
 
 
 	\section{Logike stabla izracunavanja}
 	\label{sec:CTL}
-	U LTL analizi smo zapazili da je LTL formula evaluirana preko puteva(eng. \emph{paths}). Definisali smo da je stanica(eng. \emph{state}) sistema
-	zadovoljava jednu LTL formulu ako svi putevi iz te stanice(eng. \emph{state}) zadovoljavaju istu. U ovoj strukturi drveta budući koraci još nisu
-	određeni, jer postoji više puteva koji potencijalno mogu biti ,,iskorišćena''.
-	CTL nam omogućava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL imamo operatore U, F, G i X, takodje imamo i kvantifikatore
-	A i E koji opisuju sve puteve(eng. all paths) i postojeće puteve (eng. \emph{exists paths}). 
+	U LTL analizi smo zapazili da je LTL formula evaluirana preko stanja. Definisali smo da stanje sistema
+	zadovoljava jednu LTL formulu ako sva stanja koja proizilaze iz njega zadovoljavaju istu. CTL(eng. \emph{Computation tree logic}) je logika koja je predstavljena strukturom drveta i u njoj budući koraci još nisu
+	određeni, jer postoji više stanja koja potencijalno mogu biti "iskorišćena".
+	CTL nam omogućava da prebrodimo neke nedostatke LTL metoda. Kao i u LTL, imamo operatore U, F, G i X, takođe imamo i kvantifikatore
+	A i E koji opisuju sva stanja(eng. \emph{all states}) i postojeća stanja (eng. \emph{exists states}). 
 
 \subsection{Sintaksa}
 	\label{subsec:podnaslovN}
-CTL (eng. Computation tree logic) koristi logiku stabla pri izračunavanju. 
+	CTL koristi logiku stabla pri izračunavanju. 
 	Kao pre, radimo sa konačnim skupom atomičkih formula (kao što su $p, q, r,...,p_1,p_2,p_3...$).
 
 	Definišemo CTL formulu:
 \begin{equation}
 \begin{split}
-\phi := &T | \neg T | p | (\neg \phi) | (\phi \wedge \phi) | (\phi \vee \phi) | (\phi \rightarrow \phi)| AX\phi | EX\phi | \\
+\phi := &\top| \bot | p | (\neg \phi) | (\phi \wedge \phi) | (\phi \vee \phi) | (\phi \rightarrow \phi)| AX\phi | EX\phi | \\
           &  AF\phi | EF\phi | AG\phi | EG\phi | A[\phi \cup \phi] | E[\phi \cup \phi]
 \end{split}
 \end{equation}
@@ -174,9 +176,9 @@ CTL (eng. Computation tree logic) koristi logiku stabla pri izračunavanju.
 \item  Ako veznik najvišeg prioriteta formule $\phi$ je bulovski veznik tada se pitanje zadovoljivosti razrešava
 		   preko uobičajne istinitosne tablice i rekurzije nad drvetom formule $\phi$
 \item  Ako je veznik najvišeg prioriteta neki operator koji počinje sa A, tada zadovoljivost jeste ispunjena ako
-		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A 
+		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A 
 \item  Slično ako je veznik najvišeg prioriteta neki operator koji počinje sa E, ada zadovoljivost jeste ispunjena ako
-		   svi putevi iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E 
+		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E 
 \end{enumerate}	
 
 	\section{Primena temporalnih logika u proveravanju modela}
