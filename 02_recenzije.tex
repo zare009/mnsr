@@ -1,0 +1,542 @@
+
+
+ % !TEX encoding = UTF-8 Unicode
+
+\documentclass[a4paper]{report}
+
+\usepackage[T2A]{fontenc} % enable Cyrillic fonts
+\usepackage[utf8x,utf8]{inputenc} % make weird characters work
+\usepackage[serbian]{babel}
+%\usepackage[english,serbianc]{babel}
+\usepackage{amssymb}
+
+\usepackage{color}
+\usepackage{url}
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
+
+\newcommand{\odgovor}[1]{\textcolor{blue}{#1}}
+\newcommand{\say}[1]{\textit{#1}}
+
+\begin{document}
+
+\title{Dopunite naslov svoga rada\\ \small{Dopunite autore rada}}
+
+\maketitle
+
+\tableofcontents
+
+
+
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+\odgovor{Umesto nabrajanja alata, napravio sam tabelu gde sam dodao još jednu kolonu vezanu za platformu/operativni sistem na kom se alat može primeniti - str 9}
+\odgovor{Zamenio sam redosled poglavlja, sada prvo ide nabrajanje najvažnijih alata, pa zatim opis samog esbmc alata.}
+\odgovor{Dodao sam tri referene na delu vezanom za verifikacione alate. Prvu na strani 7, drugu na strani 8, trecu na strani 9.}
+\odgovor{Sklonio sam recenicu koja nije bila dovršena.}
+\odgovor{Odgovor na zamerku "oglavlje 5 bi trebalo da se preprica" - nisam odgovorio. Smatram da ta kritika nije konstruktivna. Rad može biti razumljiv i nerazumljiv. Ukoliko je rad nastao kopiranjem i prevodjenjem više izvora i predstavlja razumljivu celinu ne vidim potrebu za "prepricavanjem" rada.}
+
+\section{O cemu rad govori?}
+% ???????? ????? ?????? ????? ? ????? ???? ?????? ?????? ?????????? ??????? ???? (? ???? ???????? ?? ??? ??? ??????? ????????? ? ????????). ???? ?? 200 ?? 400 ?????????.
+Temporalne logike su logike ciji operatori omogucavaju izražavanje vremenske komponente i zbog te osobine ove logike imaju veliku primenu u racunarstvu. Osnovne vrste ovih logika su LTL i CTL. Jedna od primena ovih logika jeste provera modela, tehnika za automatsku verifikaciju softvera i hardvera, gde je jedan od njenih najpoznatijih alata ESBMC. 
+
+\section{Krupne primedbe i sugestije}
+% ???????? ????? ???????? ? ????????????? ????? ??? ? ???? ????????? ? ??? ?? ??????? ?? ?? ???????-??????-????-?????? ?? ?? ??? ??? ????????????.
+Ono što bi najpre trebalo izmeniti jeste struktura pasusa. Veci deo pasusa nije organizovan tako da jedan pasus obraduje samo jednu temu, vec se može naci više nagomilanih tema. Primer je prvi pasus u uvodu - govori se o glavnom cilju logike u racunarstvu, zatim se navodi povezanost temporalne logike sa iskaznom logikom, pa se navodi definicija sintakse i semantike jezika, a zatim se dolazi do konacne definicije temporalne logike. Takav pasus bi trebalo razdvojiti u više pasusa.\\
+
+Trebalo bi izbeci korišcenje nekih pojmova koji nigde nisu definisani ili ih definisati u tekstu pre korišcenja. Primeri su:
+\begin{enumerate}
+\item u sekciji 2.2, u prvom pasusu koristi se pojam \textbf{put}, a nigde nije napomenuto šta je put u LTL-u
+\item u sekciji 2.2, u definiciji 2.2 koristi se "ako je $ p \in P $ ", a nigde nije definisano šta je  $P$
+\item u sekciji 2.2, u definiciji 2.2 koristi se $ s(\square) $ i $s(\lozenge)$ , a nigde nije definisano šta su $\square$ i  $\lozenge$
+\item u sekciji 3.2, u prvom pasusu koristi se oznaka $M = (S,\rightarrow, L)$ za model, a nigde nije ranije uvedena takva oznaka za model, tj. ne zna se šta je S, šta je $\rightarrow$ i šta je L
+\item u sekciji 4.1, u algoritmu 1, koristi se $L_{w}(A\neg\phi)$, a ne zna se šta je $L_{w}$
+\end {enumerate}
+
+
+
+Nije u redu da nabrajanje najpoznatijih alata za proveru modela u šestoj glavi zauzme celu stranu. Sve može da stane u jedan pasus.\\
+
+Radi boljeg razumevanja temporalnih logika, možda bi trebalo prikazati nacin upotrebe novih operatora, kao što su next, until, always...
+
+
+\section{Sitne primedbe}
+% ???????? ????? ???????? ?? ???? ???????????-????????-???????? ??????
+\begin{enumerate}
+\item \textbf{Uvod}:\\
+Postoje štamparske greške poput stavljanja dj umesto d, z umesto ž, s umesto š i slicno - \textit{takodje, odredjene, pretezno, sto, matematicke, definise, semtantika, predikarska, cesto, "ova dve vrste" umesto "ove dve vrste"}.
+
+
+Možda bi trebalo jasnije naglasiti šta su temporalne logike, na primer boldovati, jer je to ipak tema celog seminarskog rada.
+
+\item \textbf{Druga glava:}\\
+Postoji jezicka greška u drugom pasusu, skracenica za takozvani nije \textit{tkzv.} nego  \textit{tzv.}
+
+
+Trebalo bi naglasiti definiciju linearnih temporalnih logika.
+
+
+Postoje štamparske greške u definicijama 2.1 i 2.2, umesto znaka $T$ stoji znak $>$, i u definiciji 2.2, u tacki 3 i tacki 4, permutovani su znaci  $\wedge$ i $\vee$, i u istoj definiciji, na kraju, treba da stoji $s \nvDash A$ umesto $s6 \vDash A$ i u definicijama 2.2 i 2.3 bi trebalo koristiti znak $\vDash$ umesto $\vert =$.
+
+\item \textbf{Cetvrta glava:}\\
+Treba da postoji pasus izmedu sekcije i podsekcije.
+
+
+Manje štamparske greške: \textit{konacni}, \textit{daža} umesto \say{da} za, \textit{poredjenju}, \textit{ce, zasto, moguce, moze, tesko, inzenjera, obucen}.
+
+\item \textbf{Peta glava:}\\
+Na pocetku osme strane postoji nedovršena recenica - \say{Dodatno, ESBMC može da vrati vrednost verifikacionih uslova koristeci.}
+
+Možda bi trebalo da se malo proširi sekcija 5.1.
+\end{enumerate}
+\section{Provera sadržajnosti i forme seminarskog rada}
+% O????????? ?? ??????? ?????? --- ?? ????? ??????? ???? ? ???????????
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\
+Da, rad je uveo pojmove temporalne logike, naveo razlike izmedu LTL i CTL i prikazao jedan od alata za proveru modela ESBMC.
+
+
+\item Da li je nešto važno propušteno?\\
+Ništa suštinski važno, ali kao što je vec navedeno, radi boljeg razumevanja temporalnih logika, možda bi trebalo prikazati neki primer korišcenja temporalnih operatora.
+
+
+\item Da li ima suštinskih grešaka i propusta?\\
+Nema, rad je odgovorio na zadatu temu bez grešaka, tema nije promašena i obuhvaceno je sve što se nalazi u opisu teme.
+
+
+\item Da li je naslov rada dobro izabran?\\
+Možda je naslov tematski preširok, trebalo bi ga suziti poput \say{LTL, CTL i njihove primene}.
+
+
+\item Da li sažetak sadrži prave podatke o radu?\\
+Da, sažetak je obuhvatio sve o cemu se u radi govori - pojam temporalnih logika, LTL, CTL, njihove primene i ESBMC. 
+
+
+\item Da li je rad lak-težak za citanje?\\
+Rad je lak za citanje jer je sve jasno vec posle prvog citanja, samo bi trebalo uvesti i one nedefinisane pojmove koji se koriste bez prethodnog definisanja.
+
+ 
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\
+Za rad je potrebno barem osnovno znanje iskazne logike kako bi se shvatila ideja širih, temporalnih logika.
+
+
+\item Da li je u radu navedena odgovarajuca literatura?\\
+Da, sva literatura odgovara temi, nema loše navedene literature.
+
+
+\item Da li su u radu reference korektno navedene?\\
+Da, navedene su korektno. 
+
+
+\item Da li je struktura rada adekvatna?\\
+Da, krece se od šire teme u uvodu, pa se rad fokusira na LTL i CTL, pa na njihove primene. Možda bi samo trebalo navesti najpoznatije alate za proveru modela u okviru jednog pasusa pre ESBMC jer je on jedan od njih.
+
+
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\
+Broj strana je u redu (10 strana), postoji slika, ali rad ne sadrži tabelu i ima 9 referenci, umesto 10.
+
+
+\item Da li su slike i tabele funkcionalne i adekvatne?\\
+Da, postojeca slika je funkcionalna, odgovara zadatoj temi, može samostalno da se cita i tumaci, medutim, ona nije referisana iz teksta.
+\end{enumerate}
+
+\section{Ocenite sebe}
+% Napišite koliko ste upuceni u oblast koju recenzirate: 
+% a) ekspert u datoj oblasti
+% b) veoma upuceni u oblast
+% c) srednje upuceni
+% d) malo upuceni 
+% e) skoro neupuceni
+% f) potpuno neupuceni
+% Obrazložite svoju odluku
+
+Odgovor je \say{skoro neupuceni} jer mi je samo poznat pojam temporalnih logika, ništa šire od toga. 
+
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+\section{O cemu rad govori?}
+
+Ovaj seminarski rad govori o logikama koje se upotrebljavaju u racunarstvu, a koje u rezonovanje ukljucuju vreme. Upravo ove logike su sve popularnije jer omogucuju opis ponašanja hardvera i softvera u zavisnosti od vremena.
+\\Rad se bavi linearnim temporalnim logikama (LTL) i logikama stabla iz\-ra\-cu\-na\-va\-nja (CTL), nacinu na koji se koriste kao i alatima za proveravanje modela.
+%377 karaktera 
+
+\section{Krupne primedbe i sugestije}
+Zbog velike kolicine slovnih grešaka stice se utisak da rad pre predaje nije procitan. Autori se nisu držali jednog dogovora za navodenje prevoda stranih reci. Negde prevod reci ne postoji, a tamo gde postoji nekad je iskošen a nekad ne.
+\\Poglavlje 6 sadrži samo listu alata za proveru modela koja se proteže na celoj stranici. Smatram ispravnijim da se u dva-tri reda navedu najvažniji, a ostatak stranice iskoristi za upoznavanje citaoca sa karakteristikama tih alata ili pak neceg što je u vezi sa njima.
+\\Rad ne sadrži tabelu.
+
+\section{Sitne primedbe}
+Uocljive su sitne stilske greške u recenicama, kao i nepravilan raspored reci. Pored toga, u radu postoji veliki broj slovnih grešaka. U cilju poboljšanja kvaliteta ovog seminarskog rada (a ne zbog kritike) navešcu greške koje sam uocio.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{Spisak autora:} 
+
+U mejl adresi prvog autora nedostaje \emph{alas}.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{Sažetak:}
+ 
+U drugom redu nedostaje razmak: „...logike u racunarstvu,za ...“\\
+U trecem redu piše „linarne“ umesto „linearne“.\\
+U pretposlednjem redu možda izbaciti rec „ukratko“, zbog same recenice.
+\vspace{1cm}
+%-------------------------------------------------------------------------------------------
+\\ \textbf{1 Uvod:}
+
+Tekst sadrži \textbf{10} slovnih grešaka. Uglavnom se radi o slovima c,c,š i ž. Slovo d je više puta napisano kao dj. U poslednjem redu treba da piše „ove“ umesto „ova“.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{2 Linearne temporalne logike:}
+
+Predlažem da uvedeni pojmovi (koji su pogrešno stavljeni izmedu jednostrukih navodnika) budu iskošeni. 
+Na primer: \textit{linearno temporalno svojstvo}, ili \textit{True}.
+\\U drugom pasusu je pogrešno navedena skracenica za rec takozvani. Potrebno je da piše tzv.
+\\U poslednjem redu umesto „svako“ treba da piše „svaku“.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{2.1 Sintaksa}
+
+Po recenici zakljucujem da u trecem redu treba da piše „elementi“, a ne „element“.  
+U stavci pod rednim brojem 2 potreban je razmak: „/ (\textit{negation})“.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{2.2 Semantika}
+
+Iskositi nove pojmove poput pojma stanica.
+\\U cetvrtom redu rec „tranziciju“ napisana je sa dva slova n.
+\\Navodenje engleske reci \textit{traces} u zagradi treba da bude iskošeno.  
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{3 Logike stabla izracunavanja}
+
+Sam naslov poglavlja sadrži slovnu grešku. Umesto slova c treba da bude c.
+\\Rec pod navodnicima treba da bude „iskorišceni“.
+\\Engleske reci \textit{all paths} koje se nalaze u zagradi treba da budu iskošene.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{3.2 Semantika}
+
+U pasusu pod rednim brojem 4, umesto „ada“ treba da piše „tada“.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{4.1 LTL}
+
+Na više mesta (tacnije \textbf{9}) su koršcena slova s,c,z,dj umesto š,c,c,ž i d.
+\\U recenici „Algoritam linearne temporalne logike...“ piše „daža“ umesto „da, za...“
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{4.2 CTL}
+
+Smatram da je potrebno zameniti sliku nekom koja pruža više informacija.
+\\Algoritam 2: Ulaz: umesto „konacni“ treba da piše „konacni“. 
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{5 ESBMC verifikacioni alat}
+
+U osmom redu nedostaje razmak u recenici „Takvi problemi se obicno...“.
+\\Složenicu \textit{brute-force} bi trebalo iskositi ili u zagradi dati prevod kao što je to uradeno kasnije u tekstu.
+\\Na strani 8, druga recenica je nedovršena.
+\\U cetvrtom redu postoji jedna tacka viška.
+\\U navodenju pod rednim brojem 6 nedostaju razmaci oko zagrade. 
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{7 Zakljucak}
+
+Predlažem da prva recenica izgleda ovako: „Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u racunarstvu sasvim uobicajeno“ 
+\\Radi bolje razumljivosti, preformulisati poslednju recenicu.
+\vspace{0.5cm}\\
+%-------------------------------------------------------------------------------------------
+\textbf{Literatura}
+
+Za rad koji su sacinila tri autora neophodno je minimum 10 re\-fe\-re\-nci.
+\vspace{0.5cm}
+%-------------------------------------------------------------------------------------------
+
+\section{Provera sadržajnosti i forme seminarskog rada}
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\ Da, rad odgovara na temu. 
+\item Da li je nešto važno propušteno?\\ Ne. 
+\item Da li ima suštinskih grešaka i propusta?\\ Pored gorenavedenih primedbi, rad ne sadrži suštinske propuste.
+\item Da li je naslov rada dobro izabran?\\ Naslov rada je potrebno preformulisati tako da sadrži i druge oblasti kojima se rad bavi.
+\item Da li sažetak sadrži prave podatke o radu?\\ Da. Sažetak pokriva sve delove rada.
+\item Da li je rad lak-težak za citanje?\\ Van formalnih delova kao što su definicije, rad je relativno lak za citanje. 
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\ Da, za razumevanje rada potrebno je solidno predznanje iz ove oblasti.
+\item Da li je u radu navedena odgovarajuca literatura?\\ Da. 
+\item Da li su u radu reference korektno navedene?\\ Da, refernce su korektno navedene.
+\item Da li je struktura rada adekvatna?\\ Da. 
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\ Rad ne sadrži tabelu. Sve ostalo je ispunjeno.
+\item Da li su slike i tabele funkcionalne i adekvatne?\\ Slika jeste adekvatna, ali nije informativnog karaktera. 
+\end{enumerate}
+
+\section{Ocenite sebe}
+% e) skoro neupuceni
+U oblast koju recenziram sam skoro neupucen. Temporalne logike za sada nisu bile predmet mog interesovanja.
+
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+
+\section{O cemu rad govori?}
+% ???????? ????? ?????? ????? ? ????? ???? ?????? ?????? ?????????? ??????? ???? (? ???? ???????? ?? ??? ??? ??????? ????????? ? ????????). ???? ?? 200 ?? 400 ?????????.
+
+Rad govori o najosnovnijim konceptima LTL-a i CTL-a, kao i o osnovama proveravanja modela pomocu ESMBC.
+Detaljnije, opisuje temporalne logike generalno, LTL i CTL kroz njihovu sintaksu i semantiku, 
+upotrebu temporalnih logika u proveravanju modela, navodeci dva algoritma za proveravanje modela.
+
+
+\section{Krupne primedbe i sugestije}
+% ???????? ????? ???????? ? ????????????? ????? ??? ? ???? ????????? ? ??? ?? ??????? ?? ?? ???????-??????-????-?????? ?? ?? ??? ??? ????????????.
+
+U delu 2.1 nisu navedeni izvori, na koje sam slucajno natrcao tražeci informacije o operatorima
+prošlosti - \url{http://www.cs.colostate.edu/~france/CS614/Slides/Ch5-Summary.pdf}.
+
+Nabrajanje gomile rešenja za proveravanje modela mi deluje nepotrebno i beznacajno. Preporucujem
+ili eliminaciju te sekcije teksta, ili pružanje nekih znacajnijih informacija koje bolje definišu
+njihove odnose (i isticu razlike).
+
+Voleo bih da ima više primera u radu. Npr. transformacija iz neformalnog opisa rudiemantalnog 
+sistema u LTL i CTL, ili primeri rada algoritama.
+
+\section{Sitne primedbe}
+% ???????? ????? ???????? ?? ???? ???????????-????????-???????? ??????
+\begin{itemize}
+\item Adekvatniji prevod za {\em state} je stanje
+\item Pre otvorene zagrade u tekstu treba da stoji razmak
+\item Navedene strane izraze u formatu (eng. strani izraz) prevesti u (eng. {\em strani izraz})
+\item Poslednja recenica u uvodu - treba ove, ne ova.
+\item Koriste se jednostruki i dvostruki navodnici za navodenje - treba se odluciti
+\item U delu 2.1, stavka broj 2, nedostaje otvorena zagrada
+\item U delu 2.1, pri navodenju operatora prošlosti, nije uspelo iscrtavanje simbola
+\item Celavoj latinici u trecoj recenici u 2.2 i šestoj recenici u 4.1 dozvoliti da pusti kosu
+\item Koristiti 
+\begin{math}
+\vDash 
+\end{math}
+umesto \begin{math}|=\end{math}.
+\begin{verbatim}
+\vDash
+\end{verbatim}
+\item Poslednja recenica u definiciji 2.2 sadrži
+\begin{math}
+    I, s6 \vDash A 
+\end{math}, gde s6 predstavlja, pretpostavljam, s
+\item Definisati umesto dedfinisati u poslednjem redu 2.2
+\item 3.2 u cemu je razlika onda izmedu A i E kvantifikatora?
+\item Definicija algoritma linearne temporalne logike u 4.1 pre navodenja prednosti i mana sadrži
+brojne štamparske greške
+\item Od cega je NBA akronim? Bihijev automat? Takode, u NBA automat je automat suvišno.
+\item Štamparske greške u glavi 5:
+\begin{itemize}
+\item Prva recenica: kontrukcija
+\item Nedostaje razmak nakon tacke
+\item CC++
+\item Dvostruka tacka ..
+\end{itemize}
+\item Na osmoj strani. Dodatno, ESBMC može da vrati vrednost verifikacionih uslova koristeci.
+Šta bi ovo trebalo da znaci? Zatim: Naravno, program može da bude ispravan, ali da ima pogrešnih stvari.
+Neophodno je preformulisati ove recenice.
+\item Zakljucak:
+\begin{itemize}
+\item Ispraviti greške u prvoj recenici
+\item Zbog cega se istice provera konkurentnih sistema kao važnija?
+\item Greška u pretposlednjoj recenici.
+\end{itemize}
+\end{itemize}
+
+\section{Provera sadržajnosti i forme seminarskog rada}
+% O????????? ?? ??????? ?????? --- ?? ????? ??????? ???? ? ???????????
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\
+Da. Definitivno nije promašena tema.
+\item Da li je nešto važno propušteno?\\
+Ne.
+\item Da li ima suštinskih grešaka i propusta?\\
+Ne.
+\item Da li je naslov rada dobro izabran?\\
+Previše je širok. Možda Uvod u temporalne logike i proveravanje modela?
+\item Da li sažetak sadrži prave podatke o radu?\\
+Da.
+\item Da li je rad lak-težak za citanje?\\
+Bio mi je naporan za citanje usled ne toliko podnošljivog stila.
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\
+Neophodno je poznavanje iskazne logike, Bihijevih automata i pojma buduceg vremena.
+\item Da li je u radu navedena odgovarajuca literatura?\\
+Nedostaju navedeni slajdovi, inace da.
+\item Da li su u radu reference korektno navedene?\\
+Da.
+\item Da li je struktura rada adekvatna?\\
+Da.
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\
+Ne sadrži minimalan broj referenci. Navode se dva algoritma umesto tabela.
+\item Da li su slike i tabele funkcionalne i adekvatne?\\
+Ne vidim potrebu za onim dijagramom izražajne moci CTL-a i LTL-a. Smatram da bi znacajniji bili
+primeri izraza koji se mogu predstaviti u CTL-u a ne u LTL-u i obratno.
+\end{enumerate}
+
+\section{Ocenite sebe}
+% Napišite koliko ste upuceni u oblast koju recenzirate: 
+% a) ekspert u datoj oblasti
+% b) veoma upuceni u oblast
+% c) srednje upuceni
+% d) malo upuceni 
+% e) skoro neupuceni
+% f) potpuno neupuceni
+% Obrazložite svoju odluku
+
+U temporalne logike sam prakticno neupucen, a o proveravanju modela znam tek nešto malo više.
+
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+
+\section{O cemu rad govori?}
+% ???????? ????? ?????? ????? ? ????? ???? ?????? ?????? ?????????? ??????? ???? (? ???? ???????? ?? ??? ??? ??????? ????????? ? ????????). ???? ?? 200 ?? 400 ?????????.
+
+U radu ''Temporalne logike'' su opisane sintakse i semantike linearne temporalne logike (LTL) i logike stabla izracunavanja (CTL) koje se koriste u verifikaciji korektnosti informacionih sistema. Ukratko je opisana primena LTL u proveravanju modela. Istaknute su mane i prednosti ove metode i opisan je algoritam za proveru modela zasnovan na LTL i automatu. Takode je dat algoritam zasnovan na CTL i automatima za isti problem. Na kraju je dat spisak najznacajnijih alata za proveru modela i opisan je jedan od njih, ESBMC.
+
+\section{Krupne primedbe i sugestije}
+% ???????? ????? ???????? ? ????????????? ????? ??? ? ???? ????????? ? ??? ?? ??????? ?? ?? ???????-??????-????-?????? ?? ?? ??? ??? ????????????.
+
+Sažetak je protrebno napisati stilski lepše i malo detaljnije. Na primer, poceti sa:
+
+\textit{Upotreba logike u racunarstvu je veoma rasprostranjena i jedna od znacajnijih oblasti gde se primenjuje je verifikacija korektnosti informacionih sistema. Vreme je bitan faktor pri verifikaciji modela koji opisuje ponašanje jednog sistema, pa je temporalna logika pogodna za ovu primenu. U ovom radu ce biti detaljnije opisane dve temporalne logike, linearna temporalna logika i logika stabla izracunavanja...}
+
+Uvod je veoma haoticno napisan, recenice se ne nadovezuju. Pre uvodenja povezanosti iskaze logike i temporalne logike, odnosno posle prve dve recenice bi trebalo da se napiše da za pomenuti formalni opis danas uspešno koristi temporalna logika koja je povezana sa iskaznom logikom. Posle bi mogao da ide deo koji je izdvojen u drugom pasusu, pa na kraju deo o sintaksi i semantici. Ovo je jedna ideja kako da se preuredi ono što je vec napisano da ipak ima neki tok.
+
+U poglavlju 2.1 navesti kako se kombinuju osnovna pravila, odnosno kako su dobijena složenija pravila. Ne bi bilo loše i da se navede primer cemu ta pravila služe.
+
+U poglavlju 2.2 u pretposlednjem i poslednjem pasusu se pominje LT svojstvo koje nije ranije pomenuto, pa je potrebno napisati šta je to. 
+
+U poglavlju 3 naglasiti negde pri pocetku šta je CTL, odnosno napisati recenicu, dve da je u pitanju logika gde se vreme modeluje drvolikom strukturom i da postoji više potencijalnih puteva kojima se može krenuti u buducnosti (pogledati na primer na vikipediji). 
+
+U poglavlju 3.1 malo objasniti formulu (1) u smislu šta je T, šta je $\phi$, AX i drugi simboli koji se pojavljuju.
+
+U poglavlju 3.2 izbrisati skracenicu TS pošto se ne koristi nigde dalje, a vec je u poglavlju 2.2 definisana za translacioni sistem, a ovde se koristi za tranzicioni sistem.
+
+U poglavlju 4.1 i 4.2 dodati reference gde se koristi LTL odnosno CTL, kao što su:
+
+\begin{itemize}
+	\item Maggi, Fabrizio Maria, Marco Montali, Michael Westergaard, and Wil MP Van Der Aalst. "Monitoring business constraints with linear temporal logic: An approach based on colored automata." In International Conference on Business Process Management, pp. 132-147. Springer Berlin Heidelberg, 2011.
+	
+	\item Karaman, Sertac, and Emilio Frazzoli. ''Linear temporal logic vehicle routing with applications to multi-UAV mission planning.'' International Journal of Robust and Nonlinear Control 21, no. 12 (2011): 1372-1395.
+		
+	\item Miller, Keith, and Wendy MacCaull. "Verification of careflow management systems with timed BDI CTL logic." In International Conference on Business Process Management, pp. 623-634. Springer Berlin Heidelberg, 2009.
+	
+	\item Walukiewicz, Igor. "Model checking CTL properties of pushdown systems." In International Conference on Foundations of Software Technology and Theoretical Computer Science, pp. 127-138. Springer Berlin Heidelberg, 2000.
+\end{itemize}
+
+Referisati sliku u tekstu. Bilo bi bolje da se na slici navede po jedan, dva primera gde se izražajnosti poklapaju, a gde se razlikuju.
+
+Poglavlje 5 je samo preveden opis programa sa zvanicne strane i deo sa sajta:
+
+http://www.southampton.ac.uk
+
+Generisan kod je kopiran sa internet stranice:
+
+http://www.hpcc.ecs.soton.ac.uk/~dan/posters/CybersecurityLaunch.pdf
+
+Poglavlje 5 bi trebalo da se preprica. 
+
+\section{Sitne primedbe}
+% ???????? ????? ???????? ?? ???? ???????????-????????-???????? ??????
+
+Rad je prepun štamparskih greška, \textit{ošišane} latinice, nalepljeno slovo na zarez, dupla slova, nalepljena otvorena zagrada na prethodnu rec, itd. Na primer:
+\begin{itemize}
+	\item Sažetak, drugi red: \textit{,za}
+	\item Naslov treceg poglavlja: \textit{Logike stabla \textbf{izracunavanja}}
+	\item  Uvod, cetvrti red: \textit{ispravni,tj.}
+	\item Uvod, peti red: \textit{takodje}
+	\item Uvod, šesti red: \textit{pretezno}
+	\item Uvod, sedmi red: \textit{sto ce reci}
+	\item ...
+	\item Poglavlje 2.2, cetvrti red: \textit{sto predstavlja...}, \textit{trannziciju} 
+\end{itemize}
+
+Potrebno je detaljno proci kroz rad i ispraviti sve štamparske i gramaticke greške. 
+
+Obratiti pažnju i na korišcene skracenice kao što je \textit{tzv.} a ne \textit{tkzv.} kao što je napisano na kraju drugog poglavlja (može se i potpuno izbaciti iz teksta). Ukoliko je moguce izbaciti \textit{tj.} skracenice i zameniti sa \textit{odnosno} ili slicno. Takode, sve skracenice poput LTL, TS i druge moraju biti definisane. Ovo se odnosi na skracenicu NBA korišcenu u Poglavlju 4.1.
+
+Neke recenice su veoma cudno formulisane ili ne završene: 
+
+\begin{itemize}
+	\item na kraju uvoda: \textit{Rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd.} -- nije recenica,
+	
+	\item Poglavlje 2, drugi pasus: \textit{Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevede u LTL uz pomoc precizno definisane sintakse.} -- Na osnovu ovoga ispada da je LTL sam sebi svrha. Verovatno bi trebalo da piše: \textit{Svojstva napisana u prirodnom jeziku se prevode u LTL pomocu precizno definisane sintakse.}
+	
+	\item poglavlje 2.2: \textit{Razaznajemo pojmove stanica, sto predstavlja staticku strukturu i trannziciju, sto predstavlja dinamicku strukturu} -- ošišana latinica i pritom se ne vidi jasno koji pojmovi se razlikuju i šta predstavljaju. Možda bi bolje bilo: \textit{Razlikujemo pojmove stanica i tranzicija. Stanica predstavlja staticku, a tranzicija dinamicku strukturu.} ili nešto slicno.
+	
+	\item Detaljno procitati tekst i ispraviti slicne greške.
+\end{itemize} 
+
+\section{Provera sadržajnosti i forme seminarskog rada}
+% O????????? ?? ??????? ?????? --- ?? ????? ??????? ???? ? ???????????
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\
+
+\textbf{Da.} Možda je moglo da se napiše više o primenama LTL i CTL.
+
+\item Da li je nešto važno propušteno?\\
+
+\textbf{Ne.}
+
+\item Da li ima suštinskih grešaka i propusta?\\
+
+\textbf{Delimicno.} Uvodeni su pojmovi koji nisu objašnjeni, samo nabrojani, a ponekad i kasnije korišceni kao poznati. Potrebno je samo na nekim mestima dodati recenicu dve koje to opisuju.
+
+\item Da li je naslov rada dobro izabran?\\
+
+\textbf{Ne.} Rad se bavi nekim od temporalnih logika i njihovom primenom, pa bi bilo dobro da se to naznaci i u naslovu.
+
+\item Da li sažetak sadrži prave podatke o radu?\\
+
+\textbf{Delimicno.} Samo je navedeno šta se sve pominje u radu bez nekih detalja.
+
+\item Da li je rad lak-težak za citanje?\\
+
+\textbf{Težak.} Neke stvari su samo pomenute ili vrlo malo objašnjene a kasnije korišcene kao poznate. Moguce da je nedostatak prostora uzrok tome ili želja za što konciznijim opisima. 
+
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\
+
+\textbf{Da.} U radu je sve opisano dosta formalno sa malo objašnjenja, pa je potrebno dodatno se informisati kako bi se razumelo.
+
+\item Da li je u radu navedena odgovarajuca literatura?\\
+
+\textbf{Da.} Mogle su da se dodaju neke reference gde se LTL i CTL primenjuje.
+
+\item Da li su u radu reference korektno navedene?\\
+
+\textbf{Ne.} Napisane reference su korektne, ali nedostaju reference ka izvorima odakle su kopirani delovi (poglavlje 5).
+
+\item Da li je struktura rada adekvatna?\\
+
+\textbf{Delimicno.} Spisak poznatih alata za proveru modela bi mogao da bude pre opisa ESBMC alata koji je jedan od njih. Spisak alata je malo predugacak, mogao bi da se ili navede kao tekst ili ih na neki nacin organizovati u tabelu (može se uzeti neka ideja sa wikipedia.org gde ima za svaki alat više parametara dato)
+
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\
+
+\textbf{Ne.} U radu je navedeno 5 referenci što nezadovoljava minimalan broj od 10 referenci. U radu ne postoji ni jedna tabela.
+
+\item Da li su slike i tabele funkcionalne i adekvatne?\\
+
+\textbf{Ne.} U radu je prikazana jedna slika koja nije referisana u tekstu. Po opisu ispod slike, trebalo bi da opisuje izražajnost LTL i CTL, ali slika samo prikazuje da te dve logike nisu jednake.
+\end{enumerate}
+
+\section{Ocenite sebe}
+% Napišite koliko ste upuceni u oblast koju recenzirate: 
+% a) ekspert u datoj oblasti
+% b) veoma upuceni u oblast
+% c) srednje upuceni
+% d) malo upuceni 
+% e) skoro neupuceni
+ f) potpuno neupuceni
+ 
+ Nisam se ranije susretala sa ovom temom.
+% Obrazložite svoju odluku
+
+
+
+\chapter{Dodatne izmene}
+%Ovde navedite ukoliko ima izmena koje ste uradili a koje vam recenzenti nisu tražili. 
+
+\end{document}
