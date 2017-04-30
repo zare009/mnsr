@@ -72,7 +72,7 @@ Sintaksa proučava pravila koja određuju kako se strukturni elementi jezika na 
 Formula Linearne temporalne logike je sačinjena od: 
 \begin{enumerate}
 \item  Konačnog skupa atoma $(a, b, x, y, ....)$
-\item  Osnovnih logičkih operatora ($\not$  (negation) , $\wedge$ (conjunction)) 
+\item  Osnovnih logičkih operatora ($\neg$  (negation) , $\wedge$ (conjunction)) 
 \item  Osnovnih temporalnih operatora (O (next) , U (until) , true) 
 \item  Postoje i dodatni logički operatori ($\vee$ (disjunction), $\rightarrow$(implication), $\leftrightarrow$(equivalence))
 \item  Postoje i dodatni temporalni operatori ( A (”always”), E (”eventually”))
@@ -87,9 +87,9 @@ Formula Linearne temporalne logike je sačinjena od:
 
 	LTL može biti prošireno sa operatorima prošlosti: 
 \begin{enumerate}	
-\item $\square^1 \rightarrow $ Uvek u prošlosti  %ovde treba na -1 dodati!!!!!
-\item $\lozenge^1 \rightarrow $  Ponekad u prošlosti 
-\item $\circ^1 \rightarrow $ Prethodna sekvenca 
+\item $\square^{-1} \rightarrow $ Uvek u prošlosti 
+\item $\lozenge^{-1} \rightarrow $  Ponekad u prošlosti 
+\item $\circ^{-1} \rightarrow $ Prethodna sekvenca 
 \end{enumerate}
 
    Takođe ćemo napomenuti i pravila 'weak until' i 'release':
@@ -182,48 +182,48 @@ Neka je A neka LTL formula. Tada:
 
 	\section{Primena temporalnih logika u proveravanju modela}
 	\label{sec:MC}
-
+	Sada kada smo se upoznali sa osnovama LTL-a i CTL-a, prikazaćemo njihove primene u proveravanju modela.
 \subsection{LTL}
 	\label{subsec:prLTL}
 	Linearna temporalna logika ima primenu u formalnoj verifikaciji sistema, pre svega u konkurentnim programima gde je bitno utvrditi da se program ne može naći u stanju mrtve petlje \cite{baier2008principles}. 
 	
 	Provera modela je tehnika za automatsku verifikaciju softvera i hardvera. Proverava se da li sistem ispunjava specifikaciju koja je zadata formulom linearne temporalne logike. 
 	Svaki zahtev u specifikaciji može se predstaviti jednom formulom linearne temporalne logike i može se nezavisno proveriti da li je ispunjen za dati sistem. Konjunkcija svih zahteva predstavlja specifikaciju sistema.
-	Program predstavljamo kao konacni automat, i proveravamo da li je formula temporalne logike tačna u toj strukturi, odnosno da li program ispunjava specifikaciju.
-	Algoritam linearne temporalne logike za proveru modela je procedura koja vraća ,,da" za dati tranzicioni sistem TS i formulu $\phi$ ako je TS |= $\phi$, odnosno "ne" ako TS nije model formule $\phi$.
+	Program predstavljamo kao konačni automat, i proveravamo da li je formula temporalne logike tačna u toj strukturi, odnosno da li program ispunjava specifikaciju.
+	Algoritam linearne temporalne logike za proveru modela je procedura koja vraća ,,da'' za dati tranzicioni sistem $TS$ i formulu $\phi$ ako je $TS \vDash \phi$, odnosno ,,ne'' ako $TS$ nije model formule $\phi$.
 
 	Prednosti i mane korišćenja provere modela.
 
 	Prednosti: 
 \begin{itemize}
 \item Nema potrebe za formalnim dokazima korektnosti. 
-\item  Brzina, u poredjenju sa drugim metodima verifikacije. 
-\item Ako specifikacija nije zadovoljena biće generisan kontraprimer koji ce pokazati kako se došlo u to stanje i onda se može zaključiti zasto specifikacija nije ispunjena. 
-\item Moguce je proveriti ispunjenost zahteva i pre nego što je ceo sistem završen, tako da se moze vršiti provera modela tokom izrade većeg sistema. 
+\item  Brzina, u poređenju sa drugim metodima verifikacije. 
+\item Ako specifikacija nije zadovoljena biće generisan kontraprimer koji će pokazati kako se došlo u to stanje i onda se može zaključiti zašto specifikacija nije ispunjena. 
+\item Moguće je proveriti ispunjenost zahteva i pre nego što je ceo sistem završen, tako da se može vršiti provera modela tokom izrade većeg sistema. 
 \item Korišćenjem linearnih temporalnih logika mogu se iskazati svojstva konkurentnih programa koja su nam potrebna u automatskoj verifikaciji. 
 \end{itemize}	
 	Mane: 
 \begin{itemize}	
 \item Zadavanje specifikacija formulama linearne temporalne logike može da bude komplikovano. 
-\item Pisanje specifikacija je tesko i mali broj inzenjera je obucen za formalnu verifikaciju sistema. 
+\item Pisanje specifikacija je teško i mali broj inženjera je obučen za formalnu verifikaciju sistema. 
 \item  Broj stanja u kome sistem može da se nađe može biti izuzetno velik, pogotovu ako radimo proveru modela na sistemima na kojima imamo konkurentnost. 
 \end{itemize}	
 
 
-Algoritam za proveru modela upotrebom automata i linearne temporalne logike je naveden u algoritmu \ref{alg:katl}. O NBA automatima koji se koriste u ovom algoritmu može se pročitati u \cite{alur1994theory}.
+Algoritam za proveru modela upotrebom automata i linearne temporalne logike je naveden u algoritmu \ref{alg:katl}. O nedeterminističkim Buhijevim automatima (NBA) koji se koriste u ovom algoritmu može se pročitati u \cite{alur1994theory}.
 
 \begin{megaalgorithm}
 \caption{Algoritam za proveru modela upotrebom automata i linearne temporalne logike}\label{alg:katl}
 
-\textbf{Ulaz: }konačni automat (tranzicioni sistem TS) i LTL formula $\phi$ 
+\textbf{Ulaz: }konačni automat (tranzicioni sistem $TS$) i LTL formula $\phi$ 
 
-\textbf{Izlaz:} DA ako je TS |= $\phi$; inače, NE i generisan kontraprimer 
+\textbf{Izlaz:} DA ako je $TS \vDash \phi$; inače, NE i generisan kontraprimer 
 
 \Indp Konstruisati NBA $A\neg\phi$ tako da $L_\omega (A\neg \phi) = Words(\neg \phi)$
 
-	Konstruisati tranzicioni sistem TS$\circ$A 
+	Konstruisati tranzicioni sistem $TS\circ A$ 
 
-	\textbf{if} postoji put $n$ u TS $\circ$ A koji zadovoljava uslov ispunjenosti A \textbf{then} 
+	\textbf{if} postoji put $n$ u $TS \circ A$ koji zadovoljava uslov ispunjenosti $A$ \textbf{then} 
 
 		\Indp \textbf{return} NE i odgovarajući prefiks od $n$ 
 	
@@ -234,14 +234,18 @@ Algoritam za proveru modela upotrebom automata i linearne temporalne logike je n
 	\Indm \textbf{fi}
 \end{megaalgorithm}
 
+U praksi se koriste alati za proveravanje modela koji implementiraju neki od algoritama za proveravanje modela. Spin je jedan od  alata za verifikaciju softvera koji podržava zadavanje zahteva LTL formulama\cite{holzmann1997model}. Ovi programi obično rade tako što zahteve zadate LTL formulama pretvaraju u konačne automate. Kao što se vidi u algoritmu \ref{alg:katl} uzima se negacija LTL formule i pravi se automat nad njom, zatim se napravi proizvod dobijenog automata i automata koji predstavlja sistem i vrši se provera ispunjenosti uslova \cite{gastin2001fast}.
 
+Jedan primer kako se LTL formulom može zadati zahtev je sledeći. Ako posmatramo problem dodele nedeljivih resursa procesima, i formula $\alpha$ predstavlja zahtev za resursom a formula $\beta$ predstavlja realizaciju tog zahteva, onda formula $G(\alpha \rightarrow F \beta)$ označava da će svaki zahtev za resursom biti opslužen\cite{formverif}.
+
+Još jedan primer je raspoređivanje procesa. Ako formula $\alpha$ predstavlja početak rada procesa A, a formula $\beta$ kraj rada procesa B, onda formula $(\neg\alpha)\cup\beta$ znači da završetak rada procesa B mora prethoditi početku rada procesa A\cite{formverif}.
 
 \subsection{CTL}
 	\label{subsec:prCTL}
 	
-Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela \cite{rozier2011linear}
+Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka\ref{fig:ltlctlex}. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela \cite{rozier2011linear}
 Dakle model sistema je dat kao struktura, konačan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
-Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu \cite{abate2007one}.%[referenca2]
+Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu \cite{abate2007one}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -255,24 +259,21 @@ Algoritam \ref{alg:kaCTL} predstavlja algoritam za proveru modela upotrebom auto
 
 \begin{megaalgorithm}
 \caption{Algoritam za proveru modela upotrebom automata i logike stabla izračunavanja}\label{alg:kaCTL}
-% \DontPrintSemicolon
-%  \KwData{$G=(X,U)$ such that $G^{tc}$ is an order.}
- % \KwResult{$G’=(X,V)$ with $V\subseteq U$ such that $G’^{tc}$ is an interval order.}
-\textbf{Ulaz: }konacni automat (tranzicioni sistem TS) i CTL formula $\phi$ 
+\textbf{Ulaz: }konačni automat (tranzicioni sistem $TS$) i CTL formula $\phi$ 
 
-\textbf{Izlaz:} DA ako je TS |= $\phi$; inače, NE i generisan kontraprimer 
+\textbf{Izlaz:} DA ako je $TS \vDash \phi$; inače, NE i generisan kontraprimer 
 
-\Indp  Definisati model sistema$M$ koji sadrži putanje do svih stanja na osnovu skupa svih zahteva $Prop$
+\Indp  Definisati model sistema $M$ koji sadrži putanje do svih stanja na osnovu skupa svih zahteva $Prop$
 
 	Neka je $\phi$ CTL formula kojom su zadati zahtevi iz skupa $Prop$ 
 
-	Proveriti da $M \models \phi$
+	Proveriti da $M \vDash \phi$
 
-		\Indp Prevesti specifikaciju $\not\phi$ u Büchi automat  $A_{\not\phi}$ i spojiti ga sa modelom sistema $M$ da bi se formirao sistem $A_{M, \not\phi}$
+		\Indp Prevesti specifikaciju $\neg\phi$ u Buhijev automat  $A_{\neg\phi}$ i spojiti ga sa modelom sistema $M$ da bi se formirao sistem $A_{M, \neg\phi}$
 		
-		Proveriti da li $A_{M, \not\phi}$ neprazan pretragom putanja koje prihvata $A_{M, \not\phi}$
+		Proveriti da li je $A_{M, \neg\phi}$ neprazan pretragom putanja koje prihvata $A_{M, \neg\phi}$
 		
-		\textbf{if}  putanja koje prihvata $A_{M, \not\phi}$ postoji
+		\textbf{if}  putanja koje prihvata $A_{M, \neg\phi}$ postoji
 		
 		\Indp \textbf{return } NE i putanju kao kontraprimer
 		
@@ -380,6 +381,7 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\begin{primer}
 
 \begin{verbatim}
+
 	#include  <stdlib.h>  	
 	
 	int main()
