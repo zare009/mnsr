@@ -283,6 +283,70 @@ Algoritam \ref{alg:kaCTL} predstavlja algoritam za proveru modela upotrebom auto
 	\Indm \textbf{fi}
 \end{megaalgorithm}
 
+	\section{Najpoznatiji alati za proveru modela}
+\label{sec:NazpM}
+
+Neki od napoznatijih alata za proveru modela su:
+
+\begin{center}
+ \begin{tabular}{||c c||} 
+ \hline
+ \textbf{Alat}  & \textbf{Platforma / Operativni sistem} \\ [0.5ex] 
+ \hline\hline
+ ARC & Unix \\ 
+ \hline
+ BANDERA & Windows i Unix  \\
+ \hline
+ BLAST  & Windows i Unix  \\
+ \hline
+ CADENCE SMV & Windows i Uni  \\
+ \hline
+ CADP & Mac OS, Linux, Solaris, Windows  \\
+  \hline
+ CBMC & Windows i Unix \\ 
+  \hline
+ CPAchecker & Svi \\ 
+  \hline
+ CWB-NC & Windows,Unix, Mac OS \\ 
+  \hline
+ DIVINE & Unix \\ 
+  \hline
+ DREAM & Windows i Unix \\ 
+  \hline
+ DSVerifier & Windows i Unix \\ 
+   \hline
+ EBMC & Windows i Unix \\ 
+   \hline
+ Edinburgh CWB & Windows i Unix \\ 
+   \hline
+ EmbeddedValidator & Window \\ 
+   \hline
+ Expander2 & Unix \\ 
+   \hline
+ Fc2Tools &  Unix \\ 
+   \hline
+ GEAR & Windows i Unix \\ 
+   \hline
+ ImProve & Windows i Unix \\ 
+   \hline
+ Java Pathfinder &  Windows,Unix, Mac OS \\ 
+   \hline
+ LLBMC & Windows i Unix \\ 
+    \hline
+ LTSA & Windows i Unix \\ 
+     \hline
+ LTSmin & Unix, Mac OS , Windows \\
+    \hline
+ PRISM &  Windows,Unix, Mac OS \\
+   \hline
+ SATABS &  Windows i Unix \\ [1ex]
+
+ 
+ 
+ \hline
+\end{tabular}
+\end{center}
+\cite{wikiwebsite}
 	\section{ESBMC verifikacioni alat}
 	\label{sec:ESBMC}
 
@@ -297,8 +361,8 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\item Verifikuje jedno- i višenitni softver (sa deljenim promenljivama i međusobnim isključenjem);
 	\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja, mrtvim blokadama i utrkivanjima; 
 	\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača, struktura, unija i sa fiksnim zarezom.
-	\end{enumerate}
-	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. Dodatno, ESBMC može da vrati vrednost verifikacionih uslova koristeći.
+	\end{enumerate} 
+	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. \cite{esbmc}
 	\newline
 	Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu.. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
 	\newline
@@ -332,7 +396,7 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\newline
 	Violated property: file test.c line 10 function main dereference failure: dynamic object upper bound !(\_\_ESBMC\_is\_dynamic[POINTER\_OBJECT(hunk + pos)] \&\& DYNAMIC\_SIZE(hunk + pos) <= POINTER\_OFFSET(hunk) + pos) VERIFICATION FAILED
 	\end{primer}
-
+\cite{esbmc001}
 
 	\subsection{Primena}
 	\label{subsec:Primena}
@@ -340,53 +404,8 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	Verifikacija softvera može imati različite primene.  Najčeća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
 
 
-	\section{Najpoznatiji alati za proveru modela}
-\label{sec:NazpM}
 
-Neki od napoznatijih alata za proveru modela su:
-\begin{enumerate}
-\item ARC
-\item BANDERA
-\item BLAST
-\item CADENCE SMV
-\item CADP
-\item CBMC
-\item CPAchecker
-\item CWB-NC
-\item DIVINE
-\item DREAM
-\item DSVerifier
-\item EBMC
-\item Edinburgh CWB
-\item EmbeddedValidator
-\item Expander2
-\item Fc2Tools
-\item GEAR
-\item ImProve
-\item Java Pathfinder
-\item LLBMC
-\item LTSA
-\item LTSmin
-\item MCMAS
-\item mCRL2
-\item MRMC
-\item ompca, OpenMP C Analysis
-\item PAT
-\item PRISM
-\item ProB
-\item Reactis Tester
-\item RED
-\item SAL
-\item SATABS
-\item SATMC
-\item SLMC
-\item SPIN
-\item Spot
-\item TAPAAL
-\item TAPAs
-\item UPPAAL
-\item ROMEO
-\end{enumerate}
+
 
 	\section{Zaključak}
 	\label{sec:zakljucak}
