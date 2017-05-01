@@ -31,7 +31,7 @@
 
 	\begin{document}
 
-	\title{Temporalne logike\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+	\title{Uvod u temporalne logike i njihova primena u proveravanju modela\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
 	\author {Đorđe Todorović  mi12090@alas.matf.bg.ac.rs, \\ Stefan Zarić mi12147@alas.matf.bg.ac.rs, \\ Maksim Đurđevac  mi11362@alas.matf.bg.ac.rs}
 	\date{8.~april 2017.}
@@ -234,11 +234,21 @@ Algoritam za proveru modela upotrebom automata i linearne temporalne logike je n
 	\Indm \textbf{fi}
 \end{megaalgorithm}
 
-U praksi se koriste alati za proveravanje modela koji implementiraju neki od algoritama za proveravanje modela. Spin je jedan od  alata za verifikaciju softvera koji podržava zadavanje zahteva LTL formulama\cite{holzmann1997model}. Ovi programi obično rade tako što zahteve zadate LTL formulama pretvaraju u konačne automate. Kao što se vidi u algoritmu \ref{alg:katl} uzima se negacija LTL formule i pravi se automat nad njom, zatim se napravi proizvod dobijenog automata i automata koji predstavlja sistem i vrši se provera ispunjenosti uslova \cite{gastin2001fast}.
+U praksi se koriste alati za proveravanje modela koji implementiraju neki od algoritama za proveravanje modela. Ovi programi obično rade tako što zahteve zadate LTL formulama pretvaraju u konačne automate. Kao što se vidi u algoritmu \ref{alg:katl} uzima se negacija LTL formule i pravi se automat nad njom, zatim se napravi proizvod dobijenog automata i automata koji predstavlja sistem i vrši se provera ispunjenosti uslova \cite{gastin2001fast}.
 
-Jedan primer kako se LTL formulom može zadati zahtev je sledeći. Ako posmatramo problem dodele nedeljivih resursa procesima, i formula $\alpha$ predstavlja zahtev za resursom a formula $\beta$ predstavlja realizaciju tog zahteva, onda formula $G(\alpha \rightarrow F \beta)$ označava da će svaki zahtev za resursom biti opslužen\cite{formverif}.
+Jedan primer kako se LTL formulom može zadati zahtev je sledeći. Ako posmatramo problem dodele nedeljivih resursa procesima u operativnom sistemu, i formula $\alpha$ predstavlja zahtev za resursom a formula $\beta$ predstavlja realizaciju tog zahteva, onda formula $G(\alpha \rightarrow F \beta)$ označava da će svaki zahtev za resursom biti opslužen\cite{formverif}.
 
 Još jedan primer je raspoređivanje procesa. Ako formula $\alpha$ predstavlja početak rada procesa A, a formula $\beta$ kraj rada procesa B, onda formula $(\neg\alpha)\cup\beta$ znači da završetak rada procesa B mora prethoditi početku rada procesa A\cite{formverif}.
+
+% Spin je jedan od  alata za verifikaciju softvera koji podržava zadavanje zahteva LTL formulama\cite{holzmann1997model}. Zanimljiv primer gde je korišćen Spin je raspoređivanja procesa na distribuiranom operativnom sistemu. Na slici \ref{fig:dsps} je dat tranzicioni sistem koji je Spin generisao.
+
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[scale=1.0]{dsps.png}
+%\end{center}
+%\caption{Tranzicioni sistem za klijent (levo) i server (desno)}
+%\label{fig:dsps}
+%\end{figure}
 
 \subsection{CTL}
 	\label{subsec:prCTL}
