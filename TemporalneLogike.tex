@@ -52,9 +52,9 @@
 
 	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci u toj oblasti, ali u nekom formalnom obliku. Glavni cilj je zadati formalna pravila za ispitivanje validnosti zadatih argumenata.\newline
 	 
-	Uska je povezanost pojmova \emph{Temporalna logika} i \emph{Iskazna logika}, gde takođe imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretezno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju određene matematičke objekte. Sintaksa jezika definiše skup validnih simbola koji se mogu upotrebljavati i kombinovati kako bi se kreirali takođe validni izrazi. Semtantika se bavi tumačenjem izraza. Iskazna logika (i predikarska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali često imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu.
+	Uska je povezanost pojmova \emph{Temporalna logika} i \emph{Iskazna logika}, gde takođe imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretežno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju određene matematičke objekte. Sintaksa jezika definiše skup validnih simbola koji se mogu upotrebljavati i kombinovati kako bi se kreirali takođe validni izrazi. Semantika se bavi tumačenjem izraza. Iskazna logika (i predikatska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali često imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu.
 	
-	Temporalne logike su logike koje opisuju rezonovanja u kojima je uklju-čeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera. One su sve značajnije u oblasti Informacionih tehnologija, tj. računarstvu, jer se ponašanje i hardvera i softvera opisuje u zavisnosti od vremena. Preko njih se između ostalog opisuje i rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd. Vreme u Temporalnoj logici modelujemo upotrebom različitih operatora. Osnovne vrste ovih logika jesu \emph{Linearne temporalne logike(LTL)} i \emph{Logike stabla odlučivanja(CTL)}, a u daljem tekstu će ove dve vrste biti detaljnije obrađene.
+	Temporalne logike su logike koje opisuju rezonovanja u kojima je uklju-čeno i vreme. Primena ovih logika je sve veća kako kod softverskih rešenja, tako i kod kreiranja samog hardvera. One su sve značajnije u oblasti Informacionih tehnologija, tj. računarstvu, jer se ponašanje i hardvera i softvera opisuje u zavisnosti od vremena. Preko njih se između ostalog opisuje i rad operativnih sistema, funkcionisanje konkurentnih sistema, rad procesora, memorije itd. Vreme u Temporalnoj logici modelujemo upotrebom različitih operatora. Osnovne vrste ovih logika jesu \emph{Linearne temporalne logike (LTL)} i \emph{Logike stabla odlučivanja (CTL)}, a u daljem tekstu će ove dve vrste biti detaljnije obrađene.
 
 	\section{Linearne temporalne logike}
 	\label{sec:LTL}
@@ -105,7 +105,7 @@ Formula Linearne temporalne logike je sačinjena od:
 	\subsection{Semantika}
 	\label{subsec:podnaslovN}
 	
-	Sintaksa logike je definiše kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
+	Sintaksa logike definiše kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
 	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{tranzicija}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S).\cite{reeves1990logic}
 	
 	LTL formula $\varphi$ označava svojstva stanja, dok jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
@@ -297,7 +297,7 @@ Algoritam \ref{alg:kaCTL} predstavlja algoritam za proveru modela upotrebom auto
 	\section{Najpoznatiji alati za proveru modela}
 \label{sec:NazpM}
 
-Neki od napoznatijih alata za proveru modela su:
+Neki od najpoznatijih alata za proveru modela su:
 
 \begin{center}
  \begin{tabular}{||c c||} 
@@ -362,14 +362,14 @@ Neki od napoznatijih alata za proveru modela su:
 	\label{sec:ESBMC}
 
 	U dizajnu kompleksnih softverskih sistema više se truda i vremena potroši na
-	verifikaciju nego na kontrukciju samog softvera. Verifikacione tehnike  zasnovane na modelima se baziraju na modelima koji opisuju ponašanje sistema na matematički precizan i nedvosmislen način. Ispostavilo se da pre bilo kakvih verifikacionih provera, precizno modelovanje sistema često dovodi do otkrivanja nepravilnosti, nepotpunosti i nelogičnosti u neformalnim specifikacijama sistema. Takvi problemi se obično otkrivaju u kasnim fazama dizajna.Modeli sistema su praćeni algoritmima koji sistematično istražuju sva njihova stanja. To je preduslov za čitav niz tehnika verifikacije polazeći od provera modela preko simulacije do testiranja.
+	verifikaciju nego na konstrukciju samog softvera. Verifikacione tehnike  zasnovane na modelima se baziraju na modelima koji opisuju ponašanje sistema na matematički precizan i nedvosmislen način. Ispostavilo se da pre bilo kakvih verifikacionih provera, precizno modelovanje sistema često dovodi do otkrivanja nepravilnosti, nepotpunosti i nelogičnosti u neformalnim specifikacijama sistema. Takvi problemi se obično otkrivaju u kasnim fazama dizajna. Modeli sistema su praćeni algoritmima koji sistematično istražuju sva njihova stanja. To je preduslov za čitav niz tehnika verifikacije polazeći od provera modela preko simulacije do testiranja.
 	Provera modela je verifikaciona tehnika koja istražuje sva moguća stanja sistema koristeći brute-force način.
 	
 
 ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, baziran na SMT (eng. \emph{satisfiability modulo theory}) rešavaču.  On dozvoljava verifikacionom inženjeru da: 
 	\newline
 	\begin{enumerate}
-	\item Verifikuje jedno- i višenitni softver (sa deljenim promenljivama i međusobnim isključenjem);
+	\item Verifikuje jednonitni i višenitni softver (sa deljenim promenljivama i međusobnim isključenjem);
 	\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja, mrtvim blokadama i utrkivanjima; 
 	\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača, struktura, unija i sa fiksnim zarezom.
 	\end{enumerate} 
@@ -413,7 +413,7 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\subsection{Primena}
 	\label{subsec:Primena}
 
-	Verifikacija softvera može imati različite primene.  Najčeća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
+	Verifikacija softvera može imati različite primene.  Najčešća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
 
 
 
@@ -422,7 +422,7 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\section{Zaključak}
 	\label{sec:zakljucak}
 
-Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u računarstvu sasvim uobičajeno. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su ekspanziji, njihovom razvoju se sve više i više pridaje na značaju, i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, i diskutovati o prednostima i manama istih, i eventualno dati predloge za unapređivanje istih.
+Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u računa-rstvu sasvim uobičajeno. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su u ekspanziji, njihovom razvoju se sve više i više pridaje na značaju, i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, i diskutovati o prednostima i manama istih, i eventualno dati predloge za unapređivanje istih.
 
 
 	\addcontentsline{toc}{section}{Literatura}
