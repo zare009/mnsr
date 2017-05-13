@@ -50,7 +50,7 @@
 	\section{Uvod}
 	\label{sec:uvod}
 
-	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci u toj oblasti, ali u nekom formalnom obliku. Glavni cilj je zadati formalna pravila za ispitivanje validnosti zadatih argumenata.\newline
+	Glavni cilj upotrebe logike u računarstvu je da se razviju jezici koji modeluju situacije koje srećemo kao profesionalci u toj oblasti, ali u nekom formalnom obliku. Glavni cilj je zadati formalna pravila za ispitivanje validnosti zadatih argumenata.
 	 
 	Uska je povezanost pojmova \emph{Temporalna logika} i \emph{Iskazna logika}, gde takođe imamo jasno definisanu sintaksu i semantiku. Jezici u matematici su pretežno simbolički, sto će reći da kombinovanjem istih dobijamo izraze koji predstavljaju određene matematičke objekte. Sintaksa jezika definiše skup validnih simbola koji se mogu upotrebljavati i kombinovati kako bi se kreirali takođe validni izrazi. Semantika se bavi tumačenjem izraza. Iskazna logika (i predikatska logika) je dobra za opisivanje matematičkih problema koje srećemo u teoriji, ali često imamo potrebu za opisivanjem i modelovanjem problema koje srećemo svakodnevno u životu.
 	
@@ -60,21 +60,21 @@
 	\label{sec:LTL}
 
 	%\newline
-	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam \emph{linearno temporalno svojstvo} (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost \emph{True}.\cite{reeves1990logic}\newline
+	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam \emph{linearno temporalno svojstvo} (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost \emph{True}.\cite{reeves1990logic}
 
 	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika.\cite{reeves1990logic}
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 %	\newline
 	
-Sintaksa proučava pravila koja određuju kako se strukturni elementi jezika na pravilan način mogu kombinovati i stvarati takođe ispravan složeniji element. Kombinacijom operatora i atoma dobijamo logičke formule.\newline
+Sintaksa proučava pravila koja određuju kako se strukturni elementi jezika na pravilan način mogu kombinovati i stvarati takođe ispravan složeniji element. Kombinacijom operatora i atoma dobijamo logičke formule.%\newline
 
 Formula Linearne temporalne logike je sačinjena od: 
 \begin{enumerate}
 \item  Konačnog skupa atoma $(a, b, x, y, ....)$
-\item  Osnovnih logičkih operatora ($\neg$  (negation) , $\wedge$ (conjunction)) 
+\item  Osnovnih logičkih operatora ($\neg$ (negacija (eng. \emph{negation})) , $\wedge$ (konjukcija (eng. \emph{conjunction}))) 
 \item  Osnovnih temporalnih operatora (O (next) , U (until) , true) 
-\item  Postoje i dodatni logički operatori ($\vee$ (disjunction), $\rightarrow$(implication), $\leftrightarrow$(equivalence))
+\item  Postoje i dodatni logički operatori ($\vee$ (disjunkcija (eng. \emph{disjunction})), $\rightarrow$(implikacija (eng. \emph{implication})), $\leftrightarrow$(ekvivalencija (eng. \emph{equivalence})))
 \item  Postoje i dodatni temporalni operatori ( A (”always”), E (”eventually”))
 \end{enumerate}
 
@@ -110,7 +110,7 @@ Formula Linearne temporalne logike je sačinjena od:
 	
 	LTL formula $\varphi$ označava svojstva stanja, dok jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
 	
-	Semantika formule $\varphi$ je definisana kao jezik($\varphi$) gde on sadrži beskonačnan skup reči koje zadovoljavaju $\varphi$.\newline
+	Semantika formule $\varphi$ je definisana kao jezik($\varphi$) gde on sadrži beskonačnan skup reči koje zadovoljavaju $\varphi$.
 	
 	Radi lakšeg razumevanja značenja Temporalnih logika navešćemo neke opšte definicije logike, koje između ostalog važe i za Linearne temporalne logike.
 
@@ -164,20 +164,20 @@ Neka je A neka LTL formula. Tada:
 \end{split}
 \end{equation}
 	gde je $p$ iz konačkog skupa atomičkih formula.
-	\newline
+	%\newline
 	
 	\subsection{Semantika}
 	\label{subsec:podnaslovN}
 	CTL formula je interpretirana preko tranzicionog sistema (TS). Neka je $M = (S,\rightarrow, L)$ neki model, $s \in S$ i $\phi$ CTL formula.
 	Definicija modela bi bila sledeća:
 	\begin{enumerate}	
-\item Ako je $\phi$ atomička, zadovoljivost je razrešena preko L
+\item Ako je $\phi$ atomička, zadovoljivost je razrešena preko L.
 \item  Ako veznik najvišeg prioriteta formule $\phi$ je bulovski veznik tada se pitanje zadovoljivosti razrešava
-		   preko uobičajne istinitosne tablice i rekurzije nad drvetom formule $\phi$
+		   preko uobičajne istinitosne tablice i rekurzije nad drvetom formule $\phi$.
 \item  Ako je veznik najvišeg prioriteta neki operator koji počinje sa A, tada zadovoljivost jeste ispunjena ako
-		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A 
+		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol A.
 \item  Slično ako je veznik najvišeg prioriteta neki operator koji počinje sa E, tada zadovoljivost jeste ispunjena ako
-		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E 
+		   sva stanja iz s zadovoljavaju LTL formulu koja se dobija kada izbacimo simbol E.
 \end{enumerate}	
 
 	\section{Primena temporalnih logika u proveravanju modela}
