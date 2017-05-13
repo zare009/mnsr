@@ -60,9 +60,9 @@
 	\label{sec:LTL}
 
 	%\newline
-	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam \emph{linearno temporalno svojstvo} (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost \emph{True}.\cite{reeves1990logic}
+	Kao što smo već napomenuli, Temporalne logike uključuju u razmatranje vreme, a takođe smo pomenuli i neke osnovne vrste ovih logika, pa stoga ćemo prvo opisati LTL model, Linearne temporalne logike, koje vreme posmatraju kao sekvence koje se linearno ređaju jedna za drugom. Linearne temporalne logike predstavljaju beskonačan niz sekvenci gde u svakom trenutku svaka od njih ima svog naslednika, na osnovu linearne vremenske perspektive. Uvodimo i pojam \emph{linearno temporalno svojstvo} (\emph{LT svojstvo}) koje predstavlja temporalnu logičku formulu koja opisuje skup beskonačnih sekvenci koje su tačne, tj. imaju vrednost \emph{True} \cite{reeves1990logic}.
 
-	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika.\cite{reeves1990logic}
+	Svrha LTL-a jeste da se svojstva napisana u prirodnom jeziku prevedu u LTL uz pomoć precizno definisane sintakse. Ovu logiku odlikuje pojava različitih operatora, čijom upotrebom možemo opisati razne modele vremena, ali nama će za sada biti interesantni samo operatori koji opisuju linearne sekvence. Postoje i tzv. univerzalni logički veznici, kojima možemo opisati svaku vrstu  Temporalnih logika \cite{reeves1990logic}.
 	\subsection{Sintaksa}
 	\label{subsec:podnaslovN}
 %	\newline
@@ -106,7 +106,7 @@ Formula Linearne temporalne logike je sačinjena od:
 	\label{subsec:podnaslovN}
 	
 	Sintaksa logike definiše kako nešto možemo zapisati ispravno, a semantika daje značenje istom.
-	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{tranzicija}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S).\cite{reeves1990logic}
+	Vrste sistema koje obično modelujemo uz pomoć LTL-a nazivamo \emph{Tranzicionim sistemima (TS)}. Razaznajemo pojmove \emph{stanje} (eng. \emph{state}), što predstavlja statičku strukturu i \emph{tranzicija}(eng. \emph{transition}) , što predstavlja dinamičku strukturu. TS predstavlja skup stanja S povezanih tranzicionom relacijom $\rightarrow $(binarna relacija na S) \cite{reeves1990logic}.
 	
 	LTL formula $\varphi$ označava svojstva stanja, dok jedno konkretno stanje može biti potpuna LTL formula, a i ne mora.
 	
@@ -140,7 +140,7 @@ Neka je A neka LTL formula. Tada:
 \item Formula A je LTL-valjana ako za sve interpretacije $I = (S, \rho)$ i sva stanja $s \in S$, važi $I, s \models A$. U tom slučaju pišemo $\models A$.\end{enumerate}	
 \end{definicija}
 
-	TS zadovoljava LT svojstvo P ako sva njegova stanja zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanje zadovoljava P kad god sva stanja koja su proizišla iz njega zadovoljavaju P. TS zadovoljava  $\phi$ ako TS zadovoljava LT svojstva definisana na Jezik($\phi$).\cite{reeves1990logic}
+	TS zadovoljava LT svojstvo P ako sva njegova stanja zadovoljavaju P, tj. ako sva njegova ponašanja jesu prihvatljiva. A stanje zadovoljava P kad god sva stanja koja su proizišla iz njega zadovoljavaju P. TS zadovoljava  $\phi$ ako TS zadovoljava LT svojstva definisana na Jezik($\phi$) \cite{reeves1990logic}.
 
 
 	\section{Logike stabla izračunavanja}
@@ -236,9 +236,9 @@ Algoritam za proveru modela upotrebom automata i linearne temporalne logike je n
 
 U praksi se koriste alati za proveravanje modela koji implementiraju neki od algoritama za proveravanje modela. Ovi programi obično rade tako što zahteve zadate LTL formulama pretvaraju u konačne automate. Kao što se vidi u algoritmu \ref{alg:katl} uzima se negacija LTL formule i pravi se automat nad njom, zatim se napravi proizvod dobijenog automata i automata koji predstavlja sistem i vrši se provera ispunjenosti uslova \cite{gastin2001fast}.
 
-Jedan primer kako se LTL formulom može zadati zahtev je sledeći. Ako posmatramo problem dodele nedeljivih resursa procesima u operativnom sistemu, i formula $\alpha$ predstavlja zahtev za resursom a formula $\beta$ predstavlja realizaciju tog zahteva, onda formula $G(\alpha \rightarrow F \beta)$ označava da će svaki zahtev za resursom biti opslužen\cite{formverif}.
+Jedan primer kako se LTL formulom može zadati zahtev je sledeći. Ako posmatramo problem dodele nedeljivih resursa procesima u operativnom sistemu, i formula $\alpha$ predstavlja zahtev za resursom a formula $\beta$ predstavlja realizaciju tog zahteva, onda formula $G(\alpha \rightarrow F \beta)$ označava da će svaki zahtev za resursom biti opslužen \cite{formverif}.
 
-Još jedan primer je raspoređivanje procesa. Ako formula $\alpha$ predstavlja početak rada procesa A, a formula $\beta$ kraj rada procesa B, onda formula $(\neg\alpha)\cup\beta$ znači da završetak rada procesa B mora prethoditi početku rada procesa A\cite{formverif}.
+Još jedan primer je raspoređivanje procesa. Ako formula $\alpha$ predstavlja početak rada procesa A, a formula $\beta$ kraj rada procesa B, onda formula $(\neg\alpha)\cup\beta$ znači da završetak rada procesa B mora prethoditi početku rada procesa A \cite{formverif}.
 
 % Spin je jedan od  alata za verifikaciju softvera koji podržava zadavanje zahteva LTL formulama\cite{holzmann1997model}. Zanimljiv primer gde je korišćen Spin je raspoređivanja procesa na distribuiranom operativnom sistemu. Na slici \ref{fig:dsps} je dat tranzicioni sistem koji je Spin generisao.
 
@@ -253,9 +253,7 @@ Još jedan primer je raspoređivanje procesa. Ako formula $\alpha$ predstavlja p
 \subsection{CTL}
 	\label{subsec:prCTL}
 	
-Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka\ref{fig:ltlctlex}. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela \cite{rozier2011linear}
-Dakle model sistema je dat kao struktura, konačan automat, a specifikacija zahteva sistema je zadata formulama CTL-a. 
-Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu \cite{abate2007one}.
+Kao što je već ranije pomenuto izražajnost LTL i CTL nije jednaka \ref{fig:ltlctlex}. Iz tog razloga i CTL su našle svoju primenu u proveravanju modela \cite{rozier2011linear}. Dakle model sistema je dat kao struktura, konačan automat, a specifikacija zahteva sistema je zadata formulama CTL-a.  Glavna tehnika koja se ovde koristi za proveru modela je obilazak grafa pretagom u širinu \cite{abate2007one}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -373,7 +371,7 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 	\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja, mrtvim blokadama i utrkivanjima; 
 	\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača, struktura, unija i sa fiksnim zarezom.
 	\end{enumerate} 
-	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. \cite{esbmc}
+	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač \cite{esbmc}. 
 	\newline
 	Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu.. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
 	\newline
