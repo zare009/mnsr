@@ -1,4 +1,4 @@
-	% !TEX encoding = UTF-8 Unicode
+﻿	% !TEX encoding = UTF-8 Unicode
 
 	\documentclass[a4paper]{article}
 
@@ -292,97 +292,98 @@ Algoritam \ref{alg:kaCTL} predstavlja algoritam za proveru modela upotrebom auto
 	\Indm \textbf{fi}
 \end{megaalgorithm}
 
-	\section{Najpoznatiji alati za proveru modela}
-\label{sec:NazpM}
+	\section{ESBMC verifikacioni alat}
+	\label{sec:ESBMC}
+Verifikacija softvera može imati različite primene.  Najčešća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. U nastavku su prikazani neki od najpoznatijih alata (Tabela 1).
 
-Neki od najpoznatijih alata za proveru modela su:
 
+\begin{table}
 \begin{center}
- \begin{tabular}{||c c||} 
+ \begin{tabular}{||c c ||} 
  \hline
  \textbf{Alat}  & \textbf{Platforma / Operativni sistem} \\ [0.5ex] 
  \hline\hline
- ARC & Unix \\ 
+ \href{https://altarica.labri.fr/wp/} {ARC} & Unix \\ 
  \hline
- BANDERA & Windows i Unix  \\
+ \href{http://bandera.projects.cs.ksu.edu/} {BANDERA} & Windows i Unix  \\
  \hline
- BLAST  & Windows i Unix  \\
+ \href{https://en.wikipedia.org/wiki/BLAST_model_checker/} {BLAST}  & Windows i Unix  \\
  \hline
- CADENCE SMV & Windows i Uni  \\
+ \href{http://www.kenmcmil.com/smv.html} {CADENCE SMV} & Windows i Uni  \\
  \hline
- CADP & Mac OS, Linux, Solaris, Windows  \\
+ \href{https://en.wikipedia.org/wiki/Construction_and_Analysis_of_Distributed_Processes} {CADP} & Mac OS, Linux, Solaris, Windows  \\
   \hline
- CBMC & Windows i Unix \\ 
+ \href{http://www.cprover.org/cbmc/} {CBMC} & Windows i Unix \\ 
   \hline
- CPAchecker & Svi \\ 
+ \href{https://cpachecker.sosy-lab.org/} {CPAchecker} & Svi \\ 
   \hline
- CWB-NC & Windows,Unix, Mac OS \\ 
+ \href{http://www3.cs.stonybrook.edu/~cwb/} {CWB-NC} & Windows,Unix, Mac OS \\ 
   \hline
- DIVINE & Unix \\ 
+ \href{http://divine.fi.muni.cz/} {DIVINE} & Unix \\ 
   \hline
- DREAM & Windows i Unix \\ 
+ \href{https://en.wikipedia.org/wiki/DREAM_(software)} {DREAM} & Windows i Unix \\ 
   \hline
- DSVerifier & Windows i Unix \\ 
+ \href{http://dsverifier.org/} {DSVerifier} & Windows i Unix \\ 
    \hline
- EBMC & Windows i Unix \\ 
+ \href{http://www.cprover.org/ebmc/} {EBMC} & Windows i Unix \\ 
    \hline
- Edinburgh CWB & Windows i Unix \\ 
+ \href{http://homepages.inf.ed.ac.uk/perdita/cwb/} {Edinburgh CWB} & Windows i Unix \\ 
    \hline
- EmbeddedValidator & Window \\ 
+ \href{https://www.btc-es.de/en/} {EmbeddedValidator} & Window \\ 
    \hline
- Expander2 & Unix \\ 
+ \href{https://fldit-www.cs.uni-dortmund.de/~peter/ExpNeu/Welcome.html} {Expander2} & Unix \\ 
    \hline
- Fc2Tools &  Unix \\ 
+ \href{http://www-sop.inria.fr/meije/verification/} {Fc2Tools} &  Unix \\ 
    \hline
- GEAR & Windows i Unix \\ 
+ \href{http://jabc.cs.tu-dortmund.de/modelchecking/} {GEAR} & Windows i Unix \\ 
    \hline
- ImProve & Windows i Unix \\ 
+ \href{https://github.com/tomahawkins/improve/wiki/ImProve} {ImProve} & Windows i Unix \\ 
    \hline
- Java Pathfinder &  Windows,Unix, Mac OS \\ 
+ \href{https://en.wikipedia.org/wiki/Java_Pathfinder} {Java Pathfinder} &  Windows,Unix, Mac OS \\ 
    \hline
- LLBMC & Windows i Unix \\ 
+ \href{http://llbmc.org/} {LLBMC} & Windows i Unix \\ 
     \hline
- LTSA & Windows i Unix \\ 
+ \href{http://www.doc.ic.ac.uk/~jnm/book/} {LTSA} & Windows i Unix \\ 
      \hline
- LTSmin & Unix, Mac OS , Windows \\
+ \href{http://fmt.cs.utwente.nl/tools/ltsmin/} {LTSmin} & Unix, Mac OS , Windows \\
     \hline
- PRISM &  Windows,Unix, Mac OS \\
+ \href{https://en.wikipedia.org/wiki/PRISM_model_checker} {PRISM} &  Windows,Unix, Mac OS \\
    \hline
- SATABS &  Windows i Unix \\ [1ex]
-
- 
- 
+ \href{http://www.cprover.org/satabs/} {SATABS} &  Windows i Unix \\ [1ex]
  \hline
 \end{tabular}
-\end{center}
-\cite{wikiwebsite}
-	\section{ESBMC verifikacioni alat}
-	\label{sec:ESBMC}
+\caption{Verifikacioni alati \cite{wikiwebsite}}
+\end {center}
+\end {table}
+
+
+\newpage
+
 
 	U dizajnu kompleksnih softverskih sistema više se truda i vremena potroši na
 	verifikaciju nego na konstrukciju samog softvera. Verifikacione tehnike  zasnovane na modelima se baziraju na modelima koji opisuju ponašanje sistema na matematički precizan i nedvosmislen način. Ispostavilo se da pre bilo kakvih verifikacionih provera, precizno modelovanje sistema često dovodi do otkrivanja nepravilnosti, nepotpunosti i nelogičnosti u neformalnim specifikacijama sistema. Takvi problemi se obično otkrivaju u kasnim fazama dizajna. Modeli sistema su praćeni algoritmima koji sistematično istražuju sva njihova stanja. To je preduslov za čitav niz tehnika verifikacije polazeći od provera modela preko simulacije do testiranja.
 	Provera modela je verifikaciona tehnika koja istražuje sva moguća stanja sistema koristeći brute-force način.
-	
+	\newline
 
-ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, baziran na SMT (eng. \emph{satisfiability modulo theory}) rešavaču.  On dozvoljava verifikacionom inženjeru da: 
+\textbf{ESBMC} je kontekstno-ograničeni kontrolor modela ugrađen u $C$ i $C++$ softver, baziran na SMT (eng. \emph{satisfiability modulo theory}) rešavaču.  On dozvoljava verifikacionom inženjeru da: 
 	\newline
 	\begin{enumerate}
 	\item Verifikuje jednonitni i višenitni softver (sa deljenim promenljivama i međusobnim isključenjem);
 	\item Prosuđuje o aritmetičkim prekoračenjima, bezbednosti pokazivača, curenju memorije, granicama nizova, kršenju atomičnosti i redosleda izvršavanja, mrtvim blokadama i utrkivanjima; 
 	\item Verifikuje programe koji koriste aritmetiku na nivou bita, pokazivača, struktura, unija i sa fiksnim zarezom.
 	\end{enumerate} 
-	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač \cite{esbmc}. 
+	ESBMC ne zahteva od korisnika da komentariše programe sa preduslovima i postuslovima (eng. \emph{pre/post-conditions}), već mu dozvoljava da navede dodatna svojstva koristeći assert-instrukcije, koje se potom kontrolišu. Takođe, obezbeđuje tri pristupa (lenji, snimanje po rasporedu, podaproksimaciju i proširivanje) za kontrolu modela višenitnog softvera. ESBMC može biti pozivan kroz tekstualni komandni interfejs ili podešen putem dodatka za Eclipse. ESBMC obrađuje verifikacione uslove koristeći različite pozadinske teorije i prosleđuje ih direktno u SMT rešavač. \cite{esbmc} 
 	\newline
-	Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu.. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
+	Podrazumevano, ESBMC proverava da li ima nepravilnosti u samom programskom jeziku, po ISO/ANSI programskom standardu. Naravno, program može da bude ispravan, ali da ima pogrešnih stvari. Kod takvih slučajeva se dodaju dodatne specifikacije za program koristeći assert instrukcije. 
 	\newline
 	ESBMC  koristi transformacije  da pretvori program u niz matematičkih ograničenja:
 	\begin{enumerate}
 	\item Komponente biblioteka su objedinjene u programski tekst.
 	\item Kontrola toka se pretvara u jednostavnu GOTO formu.
-	\item GOTO program se prevodi u formu  u kojoj se zahteva da je promenljivoj dodeljena vrednost tačno jednom i svaka promenljiva je definisana, pre korišćenja.U ovoj fazi smo se pomerili sa predstavljanja C promenljive u promenljivu koja algebarsku nepoznatu povezuje sa svakim izvršenjem jednog zadatka.
-	\item Uvodimo dodatna ograničenja izmedju nepoznatih, koja jedino mogu biti zadovoljena ako program ima grešku.
+	\item GOTO program se prevodi u formu  u kojoj se zahteva da je promenljivoj dodeljena vrednost tačno jednom i svaka promenljiva je definisana, pre korišćenja. U ovoj fazi smo se pomerili sa predstavljanja C promenljive u promenljivu koja algebarsku nepoznatu povezuje sa svakim izvršenjem jednog zadatka.
+	\item Uvodimo dodatna ograničenja između nepoznatih, koja jedino mogu biti zadovoljena ako program ima grešku.
 	\item SMT(eng. \emph{satisfiability modulo theory}) rešavač se pokreće da istraži da li sva ograničenja mogu biti zadovoljena odjednom. Bilo koji uspeh je greška u programu.
-	\item Ako SMT solver uspe(program ne prolazi)koristimo njegovo uspešno dodeljivanje promenljive nepoznatoj da zaključimo pogrešan tok programa.
+	\item Ako SMT solver uspe (program ne prolazi) koristimo njegovo uspešno dodeljivanje promenljive nepoznatoj da zaključimo pogrešan tok programa.
 	\end{enumerate}
 	Za ovaj primer programa:
 	\newline
@@ -401,26 +402,17 @@ ESBMC je kontekstno-ograničeni kontrolor modela za ugrađeni $C\/C++$ softver, 
 		return 0;
 	}
 \end{verbatim}
-
+	\end{primer}
 	Generiše se sledeći izveštaj:
 	\newline
 	Violated property: file test.c line 10 function main dereference failure: dynamic object upper bound !(\_\_ESBMC\_is\_dynamic[POINTER\_OBJECT(hunk + pos)] \&\& DYNAMIC\_SIZE(hunk + pos) <= POINTER\_OFFSET(hunk) + pos) VERIFICATION FAILED
-	\end{primer}
+
 \cite{esbmc001}
-
-	\subsection{Primena}
-	\label{subsec:Primena}
-
-	Verifikacija softvera može imati različite primene.  Najčešća primena alata za verifikaciju je u oblasti  gde je ispravnost programa izrazito važna. 
-
-
-
-
 
 	\section{Zaključak}
 	\label{sec:zakljucak}
 
-Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u računa-rstvu sasvim uobičajeno. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su u ekspanziji, njihovom razvoju se sve više i više pridaje na značaju, i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, i diskutovati o prednostima i manama istih, i eventualno dati predloge za unapređivanje istih.
+Greške su sastavni deo svakog rada, te je njihovo pojavljivanje u računa-rstvu sasvim uobičajno. Glavni cilj je iste te greške detektovati i otkloniti na vreme, pre nego što postanu pretnja po čitav sistem. Efikasna i formalna verifikacija sistema, na prvom mestu konkurentnih, je jako važna. Temporalne logike imaju jako bitnu ulogu u kreiranju sistema koje se bave istim. Temeljno razumevanje ovih logika je krucijalno za bilo kakvo dalje istraživanje oblasti verifikacije sistema. Ovi sistemi su u ekspanziji, njihovom razvoju se sve više i više pridaje na značaju i teži se ka tome da se svi ulazi/izlazi pokriju i ispravno provere. Naravno i treba posvetiti pažnju već postojećim alatima, kao što je ESBMC, diskutovati o prednostima i manama istih i eventualno dati predloge za unapređivanje istih.
 
 
 	\addcontentsline{toc}{section}{Literatura}
